@@ -6,7 +6,8 @@ on:
       - master
 
 env:
-  container: kali-snapshot
+  container: kali-${{ github.head-ref }}
+  tag: snapshot
 
 jobs:
   size:
@@ -18,14 +19,14 @@ jobs:
       with:
         name: artis3n/kali-artis3n/$container
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ github.token }}
         registry: docker.pkg.github.com
-        tags: "${{ github.sha }}"
+        tags: "$snapshot"
     
     - name: Keep image size in check
       run: |
         docker pull wagoodman/dive \
         && docker run --rm -t -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
-          docker.pkg.github.com/artis3n/kali-artis3n/$container:${{ github.sha }} --ci --ci-config .dive-ci
+          docker.pkg.github.com/artis3n/kali-artis3n/$container:$snapshot --ci --ci-config .dive-ci
       env:
         CI: true

@@ -19,7 +19,7 @@ jobs:
       with:
         name: artis3n/kali-artis3n/kali
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ github.token }}
         registry: docker.pkg.github.com
         tag_names: true
         tags: latest
