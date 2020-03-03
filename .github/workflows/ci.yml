@@ -21,13 +21,13 @@ jobs:
       run: docker run --name $container -id --rm $container
 
     - name: Verify AutoRecon is available in the container
-      run: docker exec --tty $container env TERM=xterm sh -c 'autorecon -h'
+      run: if [ $(docker exec --tty $container env TERM=xterm sh -c 'autorecon -h') = '/usr/bin/proxychains4' ]
 
     - name: Verify that Proxychains-ng is working
       run: docker exec --tty $container env TERM=xterm sh -c 'which proxychains4'
     
     - name: Verify that MSFDB is initialized
-      run: "docker exec --tty $container env TERM=xterm sh -c 'msfdb status | sed -n 3p' == 'Active: active (running)'"
+      run: "docker exec --tty $container env TERM=xterm sh -c 'msfdb status | sed -n 3p' = 'Active: active (running)'"
     
     - name: Verify that Proxychains-ng is working
       run: docker exec --tty $container env TERM=xterm sh -c 'msfconsole -v'
@@ -35,7 +35,7 @@ jobs:
     - name: Keep image size in check
       run: |
         docker pull wagoodman/dive \
-        && docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
-        --ci --ci-config .dive-ci $container
+        && docker run --rm -it --tty -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
+        env TERM=xterm --ci --ci-config .dive-ci $container
       env:
         CI: true
