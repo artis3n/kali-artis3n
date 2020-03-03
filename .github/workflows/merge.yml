@@ -17,7 +17,7 @@ jobs:
     - name: Deploy the Docker image to GitHub Package Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: artis3n/kali-artis3n/{{ env.container }}
+        name: artis3n/kali-artis3n/${{ env.container }}
         username: ${{ github.actor }}
         password: ${{ github.token }}
         registry: docker.pkg.github.com
