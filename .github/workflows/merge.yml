@@ -40,3 +40,5 @@ jobs:
         version-regex: ${{ env.tag }}
         package-limit: 1
         version-limit: 1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
