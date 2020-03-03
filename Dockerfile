@@ -22,9 +22,9 @@ RUN mkdir /tools \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
-RUN service postgresql start && systemctl enable postgresql && msfdb init
+RUN service postgresql start && msfdb init
 
 # Need to start postgresql any time the container comes up
 # systemctl enable postgresql doesn't seem to take effect
-# I blame systemd
-CMD systemctl start postgresql && /bin/bash
+# I blame systemd, but this works at least
+CMD service postgresql start && /bin/bash

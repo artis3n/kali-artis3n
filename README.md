@@ -2,13 +2,58 @@
 
 A kalilinux/kali-rolling container with extra juice.
 
-The [kalilinux/kali-rolling] container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, and execute.
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/artis3n/kali-artis3n/Docker%20Image%20CI)](https://github.com/artis3n/kali-artis3n/actions)
+![GitHub](https://img.shields.io/github/license/artis3n/kali-artis3n)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/kali-artis3n)](https://github.com/artis3n/kali-artis3n/releases)
+[![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
+[![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-Configured tools:
+The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, and execute.
+
+## Usage
+
+Download the image:
+
+```bash
+docker pull artis3n/kali:latest
+# or
+docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest
+```
+
+Run the container:
+
+```bash
+docker run --name kali -i --tty --rm artis3n/kali:latest
+# Or detach the container and run commands through it
+docker run --name kali -id --rm artis3n/kali:latest
+docker exec -tty kali env TERM=xterm sh -c 'nmap -p- 127.0.0.1'
+```
+
+![Docker Exec](/resources/docker-exec.png)
+
+![Docker Exec AutoRecon](/resources/docker-exec-autorecon.png)
+
+Get a terminal for the backgrounded container:
+
+```bash
+docker exec -it --tty kali /bin/bash
+```
+
+![Docker TTY](/resources/docker-tty.png)
+
+Remove the backgrounded container:
+
+```bash
+docker stop kali
+```
+
+![Docker Stop](resources/docker-stop.png)
+
+## Configured tools
 
 - Metasploit / Meterpreter
   - PostgreSQL 12
-- AutoRecon
+- [AutoRecon](https://github.com/Tib3rius/AutoRecon)
   - curl
   - enum4linux
   - gobuster
@@ -26,3 +71,10 @@ Configured tools:
   - tnscmd10g
   - whatweb
   - wkhtmltoimage
+- Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
+
+## Contributions
+
+Missing a tool you would like pre-configured? File a ticket and I will add it. A pull request is also welcome.
+
+For any new tools, you must add validation tests to `.github/workflows/ci.yml`. Use the existing tests as a baseline. These tests ensure the tools are installed and pre-configured correctly.
