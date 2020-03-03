@@ -34,11 +34,3 @@ jobs:
     
     - name: Verify that Proxychains-ng is available in the container
       run: docker exec --tty $container env TERM=xterm sh -c 'msfconsole -v'
-    
-    - name: Keep image size in check
-      run: |
-        docker pull wagoodman/dive \
-        && docker run --rm -id -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
-        --tty env TERM=xterm --ci --ci-config .dive-ci $container
-      env:
-        CI: true

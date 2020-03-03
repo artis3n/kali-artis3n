@@ -1,0 +1,31 @@
+name: Mergeable
+
+on:
+  pull_request:
+    branches:
+      - master
+
+env:
+  container: kali-snapshot
+
+jobs:
+  size:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy the Docker image to GitHub Package Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n/$container
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        tags: "${{ github.sha }}"
+    
+    - name: Keep image size in check
+      run: |
+        docker pull wagoodman/dive \
+        && docker run --rm -t -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
+          docker.pkg.github.com/artis3n/kali-artis3n/$container:${{ github.sha }} --ci --ci-config .dive-ci
+      env:
+        CI: true
