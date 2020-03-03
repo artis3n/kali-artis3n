@@ -21,7 +21,7 @@ jobs:
       run: docker run --name $container -id --rm $container
 
     - name: Verify AutoRecon is available in the container
-      run: if [ $(docker exec --tty $container env TERM=xterm sh -c 'autorecon -h') = '/usr/bin/proxychains4' ]
+      run: if [ $(docker exec --tty $container env TERM=xterm sh -c 'autorecon -h') = '/usr/bin/proxychains4' ]; then exit 0; else exit 1;
 
     - name: Verify that Proxychains-ng is working
       run: docker exec --tty $container env TERM=xterm sh -c 'which proxychains4'
