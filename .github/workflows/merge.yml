@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
+
     - name: Deploy the Docker image to GitHub Package Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -22,7 +24,7 @@ jobs:
         password: ${{ github.token }}
         registry: docker.pkg.github.com
         tags: "${{ env.tag }}"
-    
+
     - name: Keep image size in check
       run: |
         docker pull wagoodman/dive \
