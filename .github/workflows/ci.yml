@@ -3,7 +3,7 @@ name: Docker Image CI
 on: [push]
 
 env:
-  container: kali
+  container: kali:${{ github.sha }}
 
 jobs:
 
@@ -28,7 +28,8 @@ jobs:
     
     - name: Verify that MSFDB is initialized
       run: |
-        if [ "$(docker exec --tty $container env TERM=xterm sh -c 'msfdb status | sed -n 3p' | sed 's/\r//')" = 'Active: active (running)' ]; then exit 0; else exit 1; fi;
+        if [ "$(docker exec --tty $container env TERM=xterm sh -c 'msfdb status | sed -n 3p' | sed 's/\r//' \
+          | sed -e 's/^[ \t]*//')" = 'Active: active (running)' ]; then exit 0; else exit 1; fi;
     
     - name: Verify that Proxychains-ng is available in the container
       run: docker exec --tty $container env TERM=xterm sh -c 'msfconsole -v'
