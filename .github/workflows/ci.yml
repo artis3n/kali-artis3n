@@ -18,19 +18,19 @@ jobs:
       run: docker build -t $container .
 
     - name: Test the Docker image
-      run: docker run -d --rm -i --name $container $container
+      run: docker run -d --rm --name $container $container
 
     - name: Verify AutoRecon is available in the container
-      run: docker exec -i $container sh -c 'autorecon -h'
+      run: docker exec --tty $container env TERM=xterm sh -c 'autorecon -h'
 
     - name: Verify that Proxychains-ng is working
-      run: docker exec -i $container sh -c 'which proxychains4'
+      run: docker exec --tty $container env TERM=xterm sh -c 'which proxychains4'
     
     - name: Verify that MSFDB is initialized
-      run: "docker exec -i $container sh -c 'msfdb status | sed -n 3p' == 'Active: active (running)'"
+      run: "docker exec --tty $container env TERM=xterm sh -c 'msfdb status | sed -n 3p' == 'Active: active (running)'"
     
     - name: Verify that Proxychains-ng is working
-      run: docker exec -i $container sh -c 'msfconsole -v'
+      run: docker exec --tty $container env TERM=xterm sh -c 'msfconsole -v'
     
     - name: Keep image size in check
       run: |
