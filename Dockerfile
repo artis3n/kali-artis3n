@@ -19,8 +19,7 @@ RUN apt-get update && apt-get full-upgrade -y --no-install-recommends \
 RUN mkdir /tools \
     && git clone --depth 1 https://github.com/Tib3rius/AutoRecon.git /tools/AutoRecon \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
-    && mv /tools/AutoRecon/autorecon.py /tools/AutoRecon/autorecon \
-    && echo "export PATH=/tools/AutoRecon:$PATH" > /root/.bashrc
+    && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
 RUN service postgresql start && msfdb init
 
