@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  container: kali-${{ github.head-ref }}
+  container: kali-${{ github.head_ref }}
   tag: ${{ github.sha }}
 
 jobs:
