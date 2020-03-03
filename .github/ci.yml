@@ -1,0 +1,41 @@
+name: Docker Image CI
+
+on: [push]
+
+env:
+  container: kali-artis3n
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build the Docker image
+      run: docker build -t $container .
+
+    - name: Test the Docker image
+      run: docker run --name $container -d
+
+    - name: Verify AutoRecon is available in the container
+      run: docker exec $container sh -c 'python3 /tools/AutoRecon/autorecon.py -h'
+
+    - name: Verify that Proxychains-ng is working
+      run: docker exec $container sh -c 'which proxychains4'
+    
+    - name: Verify that MSFDB is initialized
+      run: "docker exec $container sh -c 'msfdb status | sed -n 3p' == 'Active: active (running)'"
+    
+    - name: Verify that Proxychains-ng is working
+      run: docker exec $container sh -c 'msfconsole -v'
+    
+    - name: Keep image size in check
+      run: |
+        docker pull wagoodman/dive \
+        && docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
+        --ci --ci-config .dive-ci $container
+      env:
+        CI: true

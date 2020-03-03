@@ -1,0 +1,34 @@
+name: Deploy Docker Image
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Deploy the Docker image to GitHub Package Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n/kali-artis3n
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        tag_names: true
+        tags: latest
+
+    - name: Deploy the Docker image to Docker Hub
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n
+        username: ${{ secrets.docker_username }}
+        password: ${{ secrets.docker_password }}
+        tag_names: true
+        tags: latest
