@@ -37,8 +37,5 @@ jobs:
       uses: MobileheadHolding/github-action-purge-packages@1.0.4
       with:
         package-name-query: ${{ env.container }}
-        version-regex: ${{ env.tag }}
-        package-limit: 1
-        version-limit: 1
       env:
         GITHUB_TOKEN: ${{ github.token }}
