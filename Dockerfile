@@ -21,7 +21,8 @@ RUN mkdir /tools \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
-RUN service postgresql start && msfdb init
+# For some reason it doesn't start on the first init but does on the second
+RUN service postgresql start && msfdb init && msfdb init
 
 WORKDIR /tools
 CMD /bin/bash
