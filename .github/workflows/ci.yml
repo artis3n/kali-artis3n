@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: Build the Docker image
       run: docker build -t $container .
 
     - name: Test the Docker image
-      run: docker run --name $container -d
+      run: docker run --name $container -d $container
 
     - name: Verify AutoRecon is available in the container
-      run: docker exec $container sh -c 'python3 /tools/AutoRecon/autorecon.py -h'
+      run: docker exec $container sh -c 'autorecon -h'
 
     - name: Verify that Proxychains-ng is working
       run: docker exec $container sh -c 'which proxychains4'

@@ -22,9 +22,6 @@ RUN mkdir /tools \
     && mv /tools/AutoRecon/autorecon.py /tools/AutoRecon/autorecon \
     && echo "export PATH=/tools/AutoRecon:$PATH" > /root/.bashrc
 
-RUN git clone --depth 1 https://github.com/portcullislabs/enum4linux.git /tools/enum4linux \
-    && cp /tools/enum4linux/enum4linux.pl /usr/local/bin/enum4linux
-
 RUN service postgresql start && msfdb init
 
 WORKDIR /tools
