@@ -3,7 +3,7 @@ name: Docker Image CI
 on: [push]
 
 env:
-  container: kali:${{ github.sha }}
+  container: kali-${{github.sha}}
 
 jobs:
 
@@ -27,6 +27,7 @@ jobs:
       run: if [ "$(docker exec --tty $container env TERM=xterm sh -c 'which proxychains4' | sed 's/\r//')" = "/usr/bin/proxychains4" ]; then exit 0; else exit 1; fi;
     
     - name: Verify that MSFDB is initialized
+      # Extract the "Active:" row, remove carriage returns, and remove leading whitespace
       run: |
         if [ "$(docker exec --tty $container env TERM=xterm sh -c 'msfdb status | sed -n 3p' | sed 's/\r//' \
           | sed -e 's/^[ \t]*//')" = 'Active: active (running)' ]; then exit 0; else exit 1; fi;
