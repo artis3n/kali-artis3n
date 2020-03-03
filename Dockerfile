@@ -21,8 +21,9 @@ RUN mkdir /tools \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
-# For some reason it doesn't start on the first init but does on the second
-RUN service postgresql start && msfdb init && msfdb init
+RUN service postgresql start && systemctl enable postgresql && msfdb init
 
-WORKDIR /tools
-CMD /bin/bash
+# Need to start postgresql any time the container comes up
+# systemctl enable postgresql doesn't seem to take effect
+# I blame systemd
+CMD systemctl start postgresql && /bin/bash
