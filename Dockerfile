@@ -5,6 +5,7 @@ RUN apt-get update && apt-get full-upgrade -y --no-install-recommends \
     && apt-get install -y --no-install-recommends systemd seclists python3 python3-pip \
     python3-wheel python3-setuptools git gcc make build-essential sudo curl less vim \
     metasploit-framework nmap ssh-client manpages file zip john hydra lsof \
+    exploitdb \
     # autorecon dependencies
     samba gobuster nikto whatweb onesixtyone oscanner enum4linux smbclient \
     proxychains4 smbmap smtp-user-enum snmpcheck sslscan tnscmd10g \
@@ -18,6 +19,8 @@ RUN apt-get update && apt-get full-upgrade -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tools \
+    # Finish ExploitDB setup
+    && searchsploit -u \
     && git clone --depth 1 https://github.com/Tib3rius/AutoRecon.git /tools/AutoRecon \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon

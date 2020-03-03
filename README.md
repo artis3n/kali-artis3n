@@ -72,6 +72,7 @@ docker stop kali
   - whatweb
   - wkhtmltoimage
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
+- Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 
 ## Contributions
 
