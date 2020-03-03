@@ -18,7 +18,7 @@ jobs:
       run: docker build -t $container .
 
     - name: Test the Docker image
-      run: docker run --name $container -d $container
+      run: docker run -d --rm -it --name $container $container
 
     - name: Verify AutoRecon is available in the container
       run: docker exec $container sh -c 'autorecon -h'
