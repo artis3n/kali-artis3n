@@ -3,7 +3,7 @@ name: Docker Image CI
 on: [push]
 
 env:
-  container: kali-artis3n
+  container: kali
 
 jobs:
 
@@ -18,7 +18,7 @@ jobs:
       run: docker build -t $container .
 
     - name: Test the Docker image
-      run: docker run -d --rm --name $container $container
+      run: docker run --name $container -id --rm $container
 
     - name: Verify AutoRecon is available in the container
       run: docker exec --tty $container env TERM=xterm sh -c 'autorecon -h'
