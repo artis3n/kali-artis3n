@@ -18,14 +18,18 @@ RUN apt-get update && apt-get full-upgrade -y --no-install-recommends \
     # Remove apt-get cache from the layer to reduce container size
     && rm -rf /var/lib/apt/lists/*
 
+# Finish ExplitDB setup
+# We always get exit code 6, which is not actually a failure
+# "Exit code '6' means updated packages (APT, brew or Git)"
+RUN searchsploit -u; exit 0
+
 RUN mkdir /tools \
-    # Finish ExploitDB setup
-    && searchsploit -u \
+    # Install and configure AutoRecon
     && git clone --depth 1 https://github.com/Tib3rius/AutoRecon.git /tools/AutoRecon \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
-RUN service postgresql start && msfdb init
+RUN service postgresql start && systemctl enable --now postgresql && msfdb init
 
 # Need to start postgresql any time the container comes up
 # systemctl enable postgresql doesn't seem to take effect

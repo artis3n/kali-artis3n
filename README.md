@@ -8,7 +8,7 @@ A kalilinux/kali-rolling container with extra juice.
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, and execute.
+The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
 ## Usage
 
