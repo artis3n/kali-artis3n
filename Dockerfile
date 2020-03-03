@@ -11,6 +11,7 @@ RUN apt-get update && apt-get full-upgrade -y --no-install-recommends \
     # Has to run after systemd is installed
     # Needed for msfdb init
     && apt-get install -y --no-install-recommends systemctl \
+    # Slim down container size
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     # Remove apt-get cache from the layer to reduce container size

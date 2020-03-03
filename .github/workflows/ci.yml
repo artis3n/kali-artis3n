@@ -38,7 +38,7 @@ jobs:
     - name: Keep image size in check
       run: |
         docker pull wagoodman/dive \
-        && docker run --rm -it --tty -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
-        env TERM=xterm --ci --ci-config .dive-ci $container
+        && docker run --rm -id -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
+        --tty env TERM=xterm --ci --ci-config .dive-ci $container
       env:
         CI: true
