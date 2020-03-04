@@ -1,0 +1,44 @@
+name: Deploy Docker Image
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+
+  release:
+    name: Release GitHub Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release GitHub Actions
+        uses: technote-space/release-github-actions@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get the version
+      id: get_version
+      run: echo ::set-env name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+    - name: Deploy the Docker image to GitHub Package Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n/kali
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+        registry: docker.pkg.github.com
+        tags: "latest,${{ env.VERSION }}"
+
+    - name: Deploy the Docker image to Docker Hub
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali
+        username: ${{ secrets.docker_username }}
+        password: ${{ secrets.docker_password }}
+        tags: "latest,${{ env.VERSION }}"
