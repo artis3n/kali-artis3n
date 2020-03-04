@@ -24,7 +24,7 @@ jobs:
       run: docker exec -t $container which autorecon
 
     - name: Verify that Proxychains-ng is available in the container
-      run: docker exec -t $containerw which proxychains4
+      run: docker exec -t $container which proxychains4
     
     - name: Verify that MSFDB is initialized
       run: docker exec -t $container msfdb status
