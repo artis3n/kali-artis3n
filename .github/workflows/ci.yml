@@ -18,19 +18,16 @@ jobs:
       run: docker build -t $container .
 
     - name: Run the Docker image
-      run: docker run --name $container -id --rm $container
+      run: docker run --name $container -d --rm $container
 
     - name: Verify AutoRecon is available in the container
-      run: docker exec --tty $container env TERM=xterm sh -c 'autorecon -h'
+      run: docker exec $container autorecon
 
     - name: Verify that Proxychains-ng is available in the container
-      run: if [ "$(docker exec --tty $container env TERM=xterm sh -c 'which proxychains4' | sed 's/\r//')" = "/usr/bin/proxychains4" ]; then exit 0; else exit 1; fi;
-    
-    - name: Verify that PostgreSQL is running
-      run: if [ "$(docker exec --tty $container env TERM=xterm sh -c 'systemctl is-enabled postgresql')" = "enabled" ]; then exit 0; else exit 1; fi;
+      run: docker exec $container which proxychains4
     
     - name: Verify that MSFDB is initialized
-      run: docker exec --tty $container env TERM=xterm sh -c 'msfdb status'
+      run: docker exec $container msfdb status
     
     - name: Verify that msfconsole is available in the container
-      run: docker exec --tty $container env TERM=xterm sh -c 'msfconsole -v'
+      run: docker exec $container msfconsole -v

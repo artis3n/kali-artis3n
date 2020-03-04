@@ -25,6 +25,8 @@ RUN mkdir /tools \
 
 RUN service postgresql start && msfdb init
 
+ENV TERM=xterm
+
 # Need to start postgresql any time the container comes up
 # systemctl enable postgresql doesn't seem to take effect
 # I blame systemd, but this works at least
