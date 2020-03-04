@@ -18,10 +18,10 @@ jobs:
       run: docker build -t $container .
 
     - name: Run the Docker image
-      run: docker run --name $container -d --rm $container
+      run: docker run --name $container -id --rm $container
 
     - name: Verify AutoRecon is available in the container
-      run: docker exec $container autorecon
+      run: docker exec $container autorecon -h
 
     - name: Verify that Proxychains-ng is available in the container
       run: docker exec $container which proxychains4

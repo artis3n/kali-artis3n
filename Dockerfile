@@ -1,5 +1,6 @@
 FROM kalilinux/kali-rolling:latest
 LABEL maintainer="Artis3n"
+ENV TERM=xterm
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends systemd seclists python3 python3-pip \
@@ -24,8 +25,6 @@ RUN mkdir /tools \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
 RUN service postgresql start && msfdb init
-
-ENV TERM=xterm
 
 # Need to start postgresql any time the container comes up
 # systemctl enable postgresql doesn't seem to take effect
