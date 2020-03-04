@@ -20,6 +20,9 @@ A premium is placed on keeping this image as small as is reasonable given its in
 
 Download the image:
 
+- [Docker Hub](https://hub.docker.com/repository/docker/artis3n/kali)
+- [GitHub Packages](https://github.com/artis3n/kali-artis3n/packages/143757)
+
 ```bash
 docker pull artis3n/kali:latest
 # or
