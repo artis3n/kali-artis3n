@@ -10,6 +10,12 @@ A kalilinux/kali-rolling container with extra juice.
 
 The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
+A premium is placed on keeping this image as small as is reasonable given its contents. Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
+
+![Dive image efficiency](resources/dive-efficiency.png)
+
+<small>Last checked: 2020-03-04</small>
+
 ## Usage
 
 Download the image:
@@ -23,10 +29,10 @@ docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest
 Run the container:
 
 ```bash
-docker run --name kali -i --tty --rm artis3n/kali:latest
+docker run --name kali -it --rm artis3n/kali:latest
 # Or detach the container and run commands through it
 docker run --name kali -id --rm artis3n/kali:latest
-docker exec -tty kali env TERM=xterm sh -c 'nmap -p- 127.0.0.1'
+docker exec -t kali nmap -p- 127.0.0.1
 ```
 
 ![Docker Exec](/resources/docker-exec.png)
@@ -36,7 +42,7 @@ docker exec -tty kali env TERM=xterm sh -c 'nmap -p- 127.0.0.1'
 Get a terminal for the backgrounded container:
 
 ```bash
-docker exec -it --tty kali /bin/bash
+docker exec -it kali /bin/bash
 ```
 
 ![Docker TTY](/resources/docker-tty.png)
