@@ -16,8 +16,25 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ github.token }}
 
-  deploy:
+  deploy-docker:
 
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get the version
+      id: get_version
+      run: echo ::set-env name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+    - name: Deploy the Docker image to Docker Hub
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali
+        username: ${{ secrets.docker_username }}
+        password: ${{ secrets.docker_password }}
+        tags: "latest,${{ env.VERSION }}"
+  
+  deploy-github:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,12 +50,4 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
         registry: docker.pkg.github.com
-        tags: "latest,${{ env.VERSION }}"
-
-    - name: Deploy the Docker image to Docker Hub
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali
-        username: ${{ secrets.docker_username }}
-        password: ${{ secrets.docker_password }}
         tags: "latest,${{ env.VERSION }}"
