@@ -21,16 +21,16 @@ jobs:
       run: docker run --name $container -id --rm $container
 
     - name: Verify AutoRecon is available in the container
-      run: docker exec $container autorecon -h
+      run: docker exec --tty $container autorecon -h
 
     - name: Verify that Proxychains-ng is available in the container
-      run: docker exec $container which proxychains4
+      run: docker exec --tty $container which proxychains4
     
     - name: Verify that MSFDB is initialized
-      run: docker exec $container msfdb status
+      run: docker exec --tty $container msfdb status
     
     - name: Verify that msfconsole is available in the container
-      run: docker exec $container msfconsole -v
+      run: docker exec --tty $container msfconsole -v
     
     - name: Clean up the running container
       run: docker stop $container
