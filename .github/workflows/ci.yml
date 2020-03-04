@@ -29,8 +29,8 @@ jobs:
     - name: Verify that MSFDB is initialized
       run: docker exec $container msfdb status
     
-    - name: Verify that msfconsole is available in the container
-      run: docker exec $container msfconsole -v
+    - name: Verify that msfconsole is available and ready in the container
+      run: docker exec $container msfconsole -q -x exit
 
     - name: cleanup the running container
       run: docker stop $container

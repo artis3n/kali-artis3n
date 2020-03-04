@@ -23,10 +23,10 @@ docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest
 Run the container:
 
 ```bash
-docker run --name kali -i --tty --rm artis3n/kali:latest
+docker run --name kali -it --rm artis3n/kali:latest
 # Or detach the container and run commands through it
-docker run --name kali -id --rm artis3n/kali:latest
-docker exec -tty kali env TERM=xterm sh -c 'nmap -p- 127.0.0.1'
+docker run --name kali -d --rm artis3n/kali:latest
+docker exec -it kali env TERM=xterm nmap -p- 127.0.0.1
 ```
 
 ![Docker Exec](/resources/docker-exec.png)
@@ -36,7 +36,7 @@ docker exec -tty kali env TERM=xterm sh -c 'nmap -p- 127.0.0.1'
 Get a terminal for the backgrounded container:
 
 ```bash
-docker exec -it --tty kali /bin/bash
+docker exec -it kali bash
 ```
 
 ![Docker TTY](/resources/docker-tty.png)

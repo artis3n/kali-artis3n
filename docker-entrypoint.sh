@@ -2,7 +2,7 @@
 
 set -e
 
-service postgresql start 
-msfdb init
+service postgresql start
+msfdb start
 
 exec "$@"
