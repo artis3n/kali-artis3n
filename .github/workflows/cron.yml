@@ -26,10 +26,6 @@ jobs:
       with:
         ref: master
 
-    - name: Get the version
-      id: get_version
-      run: echo ::set-env name=VERSION::${GITHUB_REF/refs\/tags\//}
-
     - name: Deploy the Docker image to GitHub Package Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -37,7 +33,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
         registry: docker.pkg.github.com
-        tags: "latest,daily,${{ env.VERSION }}"
+        tags: "latest,daily"
 
     - name: Deploy the Docker image to Docker Hub
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -45,4 +41,4 @@ jobs:
         name: artis3n/kali
         username: ${{ secrets.docker_username }}
         password: ${{ secrets.docker_password }}
-        tags: "latest,daily,${{ env.VERSION }}"
+        tags: "latest,daily"
