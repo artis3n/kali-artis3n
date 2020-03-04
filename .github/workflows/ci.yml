@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the Docker image
+    - name: Build the Docker image in the background, making sure it stays up for these tests
       run: docker build -t $container .
 
     - name: Run the Docker image
@@ -31,3 +31,6 @@ jobs:
     
     - name: Verify that msfconsole is available in the container
       run: docker exec $container msfconsole -v
+    
+    - name: Clean up the running container
+      run: docker stop $container
