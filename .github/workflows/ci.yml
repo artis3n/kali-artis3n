@@ -17,8 +17,8 @@ jobs:
     - name: Build the Docker image
       run: docker build -t $container .
 
-    - name: Run the Docker image
-      run: docker run --name $container -d --rm $container
+    - name: Run the Docker image in the background, making sure it stays up for these tests
+      run: docker run --name $container -d --rm $container sleep 3600
 
     - name: Verify AutoRecon is available in the container
       run: docker exec $container which autorecon
