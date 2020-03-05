@@ -87,6 +87,7 @@ docker stop kali
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 - JohnTheRipper (jumbo)
 - SQLMap
+- Hydra
 
 ## Contributions
 
