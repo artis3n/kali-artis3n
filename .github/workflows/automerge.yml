@@ -1,0 +1,32 @@
+name: automerge
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  status: {}
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@5ad9f38505afff96c6ad2d1c1bf2775135a7d309"
+        env:
+          GITHUB_TOKEN: "${{ github.token }}"
+          MERGE_METHOD: squash
+          MERGE_FORKS: false
+          MERGE_DELETE_BRANCH: true
+          # It takes ~6 minutes for CI to finish. Check for mergeability for 15 minutes.
+          MERGE_RETRY_SLEEP: 60000
+          MERGE_RETRIES: 15
