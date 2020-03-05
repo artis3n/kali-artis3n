@@ -35,5 +35,8 @@ jobs:
     - name: Verify that sqlmap is available
       run: docker exec -t $container sqlmap --version
     
+    - name: Verify that the aws CLI is available
+      run: docker exec -t $container aws --version
+    
     - name: Clean up the running container
       run: docker stop $container
