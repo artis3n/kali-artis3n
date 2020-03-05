@@ -1,4 +1,4 @@
-# kali-artis3n
+# artis3n/kali
 
 A kalilinux/kali-rolling container with extra juice.
 
