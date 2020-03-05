@@ -6,7 +6,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends systemd seclists \
     python3 python3-pip python3-wheel python3-setuptools \
     git curl less vim metasploit-framework nmap ssh-client \
-    manpages file zip john hydra lsof exploitdb awscli \
+    manpages file zip john hydra lsof exploitdb awscli sqlmap \
     # autorecon dependencies
     samba gobuster nikto whatweb onesixtyone oscanner enum4linux smbclient \
     proxychains4 smbmap smtp-user-enum snmpcheck sslscan tnscmd10g \
