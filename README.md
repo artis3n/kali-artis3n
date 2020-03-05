@@ -11,7 +11,7 @@ A kalilinux/kali-rolling container with extra juice.
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, execute, pwn.
+The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 2.2 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
 A premium is placed on keeping this image as small as is reasonable given its intended purpose. For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size to 7.9 GB - a 6GB increase. Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
@@ -85,6 +85,8 @@ docker stop kali
   - wkhtmltoimage
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
+- JohnTheRipper (jumbo)
+- SQLMap
 
 ## Contributions
 
