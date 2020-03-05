@@ -42,7 +42,10 @@ jobs:
       run: docker exec -t $container john -h
     
     - name: Verify that hydra is available
-      run: docker exec -t $container hydra -h
+      run: docker exec -t $container which hydra
+    
+    - name: Verify that hashcat is available
+      run: docker exec -t $container hashcat --version
     
     - name: Clean up the running container
       run: docker stop $container
