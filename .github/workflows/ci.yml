@@ -32,5 +32,20 @@ jobs:
     - name: Verify that msfconsole is available in the container
       run: docker exec -t $container msfconsole -v
     
+    - name: Verify that sqlmap is available
+      run: docker exec -t $container sqlmap --version
+    
+    - name: Verify that the aws CLI is available
+      run: docker exec -t $container aws --version
+    
+    - name: Verify that john the ripper is available
+      run: docker exec -t $container john -h
+    
+    - name: Verify that hydra is available
+      run: docker exec -t $container which hydra
+    
+    - name: Verify that hashcat is available
+      run: docker exec -t $container hashcat --version
+    
     - name: Clean up the running container
       run: docker stop $container
