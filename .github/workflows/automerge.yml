@@ -27,3 +27,6 @@ jobs:
           MERGE_METHOD: squash
           MERGE_FORKS: false
           MERGE_DELETE_BRANCH: true
+          # It takes ~6 minutes for CI to finish. Check for mergeability for 15 minutes.
+          MERGE_RETRY_SLEEP: 60000
+          MERGE_RETRIES: 15
