@@ -38,5 +38,11 @@ jobs:
     - name: Verify that the aws CLI is available
       run: docker exec -t $container aws --version
     
+    - name: Verify that john the ripper is available
+      run: docker exec -t $container john --version
+    
+    - name: Verify that hydra is available
+      run: docker exec -t $container hydra --version
+    
     - name: Clean up the running container
       run: docker stop $container
