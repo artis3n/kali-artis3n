@@ -68,10 +68,10 @@ docker stop kali
 - [AutoRecon](https://github.com/Tib3rius/AutoRecon)
   - curl
   - enum4linux
-  - gobuster
+  - **gobuster**
   - nbtscan
-  - nikto
-  - nmap
+  - **nikto**
+  - **nmap**
   - onesixtyone
   - oscanner
   - smbclient
