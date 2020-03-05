@@ -1,12 +1,13 @@
-# kali-artis3n
+# artis3n/kali
 
 A kalilinux/kali-rolling container with extra juice.
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/artis3n/kali-artis3n/Docker%20Image%20CI)](https://github.com/artis3n/kali-artis3n/actions)
-![GitHub](https://img.shields.io/github/license/artis3n/kali-artis3n)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/kali-artis3n)](https://github.com/artis3n/kali-artis3n/releases)
-![Docker Pulls](https://img.shields.io/docker/pulls/artis3n/kali)
+[![Docker Pulls](https://img.shields.io/docker/pulls/artis3n/kali)](https://hub.docker.com/r/artis3n/kali)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/kali-artis3n)
+![GitHub](https://img.shields.io/github/license/artis3n/kali-artis3n)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
@@ -16,7 +17,7 @@ A premium is placed on keeping this image as small as is reasonable given its in
 
 ![Dive image efficiency](resources/dive-efficiency.png)
 
-<small>Last checked: 2020-03-04</small>
+<small>Last checked: 2020-03-05</small>
 
 ## Usage
 
@@ -84,6 +85,9 @@ docker stop kali
   - wkhtmltoimage
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
+- JohnTheRipper (jumbo)
+- SQLMap
+- Hydra
 
 ## Contributions
 

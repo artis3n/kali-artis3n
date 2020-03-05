@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the Docker image in the background, making sure it stays up for these tests
+    - name: Build the Docker image in the background
       run: docker build -t $container .
 
-    - name: Run the Docker image
+    - name: Run the Docker image, making sure it stays up for these tests
       run: docker run --name $container -id --rm $container
 
     - name: Verify AutoRecon is available in the container
@@ -43,9 +43,6 @@ jobs:
     
     - name: Verify that hydra is available
       run: docker exec -t $container which hydra
-    
-    - name: Verify that hashcat is available
-      run: docker exec -t $container hashcat --version
     
     - name: Clean up the running container
       run: docker stop $container
