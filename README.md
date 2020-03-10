@@ -17,7 +17,9 @@ A premium is placed on keeping this image as small as is reasonable given its in
 
 ![Dive image efficiency](resources/dive-efficiency.png)
 
-<small>Last checked: 2020-03-05</small>
+<small>Last checked: 2020-03-09</small>
+
+The container is not meant for a persistent attacker environment. The intention is for a quick environment to run attacks and document the results outside of the container. The container does not mount a volume for persistent storage - although, like any container, storage inside the container will remain until you `docker rm`.
 
 ## Usage
 
@@ -37,7 +39,7 @@ Run the container:
 ```bash
 docker run --name kali -it --rm artis3n/kali:latest
 # Or detach the container and run commands through it
-docker run --name kali -id --rm artis3n/kali:latest
+docker run --name kali -id artis3n/kali:latest
 docker exec -t kali nmap -p- 127.0.0.1
 ```
 
@@ -53,13 +55,18 @@ docker exec -it kali /bin/bash
 
 ![Docker TTY](/resources/docker-tty.png)
 
-Remove the backgrounded container:
+Stop the backgrounded container, turn it back on whenever you need to run a command:
 
 ```bash
 docker stop kali
+docker start kali
 ```
 
-![Docker Stop](resources/docker-stop.png)
+Kill the backgrounded container:
+
+```bash
+docker stop kali && docker rm kali
+```
 
 ## Configured tools
 
