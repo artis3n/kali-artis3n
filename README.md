@@ -78,6 +78,13 @@ Kill the backgrounded container:
 docker stop kali && docker rm kali
 ```
 
+Alias a command to your container, run commands through the container from your terminal:
+
+```bash
+alias kali="docker exec -t kali"
+kali searchsploit tomcat
+```
+
 ## Configured tools
 
 - Amass
