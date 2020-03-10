@@ -1,0 +1,22 @@
+name: Vulnerability Scan
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 9 * * *'
+
+jobs:
+  scan:
+    name: Daily Vulnerability Scan
+    runs-on: ubuntu-latest
+    env:
+      container: artis3n/kali
+    steps:
+      - name: Pull docker image
+        run: docker pull ${{ env.container }}
+
+      - uses: homoluctus/gitrivy@7adbcc6258fcb1e562903ff4ec5ff5aaea935987
+        with:
+          token: ${{ github.token }}
+          image: "${{ env.container }}"
+          issue_title: Trivy Scan Results
