@@ -1,7 +1,6 @@
 name: Vulnerability Scan
 
 on:
-  push:
   schedule:
     - cron: '0 9 * * *'
 
@@ -15,7 +14,7 @@ jobs:
       - name: Pull docker image
         run: docker pull ${{ env.container }}
 
-      - uses: homoluctus/gitrivy@7adbcc6258fcb1e562903ff4ec5ff5aaea935987
+      - uses: homoluctus/gitrivy@master
         with:
           token: ${{ github.token }}
           image: "${{ env.container }}"
