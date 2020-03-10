@@ -23,7 +23,7 @@ A premium is placed on keeping this image as small as is reasonable given its in
 
 Download the image:
 
-- [Docker Hub](https://hub.docker.com/repository/docker/artis3n/kali)
+- [Docker Hub](https://hub.docker.com/r/artis3n/kali)
 - [GitHub Packages](https://github.com/artis3n/kali-artis3n/packages/143757)
 
 ```bash
@@ -68,10 +68,10 @@ docker stop kali
 - [AutoRecon](https://github.com/Tib3rius/AutoRecon)
   - curl
   - enum4linux
-  - gobuster
+  - **gobuster**
   - nbtscan
-  - nikto
-  - nmap
+  - **nikto**
+  - **nmap**
   - onesixtyone
   - oscanner
   - smbclient
