@@ -3,8 +3,8 @@ LABEL maintainer="Artis3n"
 ENV TERM=xterm
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends systemd seclists \
-    python3 python3-pip python3-wheel python3-setuptools \
+    && apt-get install -y --no-install-recommends systemd wordlists \
+    python3 python3-pip python3-wheel python3-setuptools sslyze \
     git curl less vim metasploit-framework nmap ssh-client \
     manpages file zip john hydra lsof exploitdb awscli sqlmap \
     # autorecon dependencies
@@ -24,6 +24,8 @@ RUN mkdir /tools \
     && git clone --depth 1 https://github.com/Tib3rius/AutoRecon.git /tools/AutoRecon \
     && cd /tools/AutoRecon && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
+
+RUN gzip -d /usr/share/wordlists/rockyou.txt.gz
 
 RUN service postgresql start && msfdb init
 

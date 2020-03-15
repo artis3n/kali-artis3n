@@ -23,7 +23,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Deploy the Docker image to GitHub Package Registry
+    - name: Deploy the Docker image to GitHub Package Registry - Semver
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n/kali
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+        registry: docker.pkg.github.com
+        tag_semver: true
+
+    - name: Deploy the Docker image to GitHub Package Registry - Latest
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: artis3n/kali-artis3n/kali
@@ -31,13 +40,19 @@ jobs:
         password: ${{ github.token }}
         registry: docker.pkg.github.com
         tags: "latest"
-        tag_semver: true
 
-    - name: Deploy the Docker image to Docker Hub
+    - name: Deploy the Docker image to Docker Hub - Semver
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali
+        username: ${{ secrets.docker_username }}
+        password: ${{ secrets.docker_password }}
+        tag_semver: true
+    
+    - name: Deploy the Docker image to Docker Hub - Latest
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: artis3n/kali
         username: ${{ secrets.docker_username }}
         password: ${{ secrets.docker_password }}
         tags: "latest"
-        tag_semver: true

@@ -11,15 +11,24 @@ A kalilinux/kali-rolling container with extra juice.
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/artis3n?style=social)](https://twitter.com/Artis3n)
 
-The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with few pre-installed services. It is meant to be lightweight and clocks in around 118 MB. This container is around 1.9 GB. It installs and pre-configures a number of frequently uses Kali tools. It is meant to allow you to get up and running with a Kali environment on an ephemeral host. Don't spend time configuring and tweaking - pull, run, execute, pwn.
+The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with no pre-installed services.
+It is meant to be lightweight and clocks in around 118 MB.
+This container, uncompressed, is around 1.9 GB.
+It installs and pre-configures a number of frequently uses Kali tools.
+It is meant to allow you to quickly get up and running with a Kali environment on an ephemeral host.
+Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
-A premium is placed on keeping this image as small as is reasonable given its intended purpose. For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size to 7.9 GB - a 6GB increase. Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
+A premium is placed on keeping this image as small as is reasonable given its intended purpose.
+For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size to 7.9 GB - a 6GB increase.
+Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
 ![Dive image efficiency](resources/dive-efficiency.png)
 
 <small>Last checked: 2020-03-09</small>
 
-The container is not meant for a persistent attacker environment. The intention is for a quick environment to run attacks and document the results outside of the container. The container does not mount a volume for persistent storage - although, like any container, storage inside the container will remain until you `docker rm`.
+The container is not meant for a persistent attacker environment.
+The intention is for a quick environment to run attacks and document the results outside of the container.
+The container does not mount a volume for persistent storage - although, like any container, storage inside the container will remain until you `docker rm`.
 
 ## Usage
 
@@ -93,11 +102,16 @@ docker stop kali && docker rm kali
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 - JohnTheRipper (jumbo)
+- Seclists wordlist (/usr/share/seclists)
+- Rockyou wordlist (/usr/share/wordlists)
 - SQLMap
 - Hydra
+- SSLyze
 
 ## Contributions
 
-Missing a tool you would like pre-configured? File a ticket and I will add it. A pull request is also welcome.
+Missing a tool you would like pre-configured? File a ticket and I will add it.
+A pull request is also welcome.
 
-For any new tools, you must add validation tests to `.github/workflows/ci.yml`. Use the existing tests as a baseline. These tests ensure the tools are installed and pre-configured correctly.
+For any new tools, you must add validation tests to `.github/workflows/ci.yml`. Use the existing tests as a baseline.
+These tests ensure the tools are installed and pre-configured correctly.
