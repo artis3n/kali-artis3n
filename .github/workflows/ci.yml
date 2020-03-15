@@ -18,7 +18,7 @@ jobs:
       run: docker build --target base -t $container:base .
 
     - name: Run the Docker image, making sure it stays up for these tests
-      run: docker run --name $container -id --rm $container
+      run: docker run --name $container -id --rm $container:base
 
     - name: Verify AutoRecon is available in the container
       run: docker exec -t $container autorecon -h
@@ -55,6 +55,9 @@ jobs:
 
     - name: Build the Docker WORDLISTS image in the background
       run: docker build --target wordlists -t $container:wordlists .
+    
+    - name: Run the Docker image, making sure it stays up for these tests
+      run: docker run --name $container -id --rm $container:wordlists
     
     - name: Check for Seclists presence
       run: docker exec -t $container ls /usr/share/seclists
