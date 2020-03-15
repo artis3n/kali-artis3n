@@ -13,18 +13,19 @@ A kalilinux/kali-rolling container with extra juice.
 
 The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with no pre-installed services.
 It is meant to be lightweight and clocks in around 118 MB.
-This container, uncompressed, is around 1.9 GB.
+This container, uncompressed, is around 2.0 GB.
 It installs and pre-configures a number of frequently uses Kali tools.
 It is meant to allow you to quickly get up and running with a Kali environment on an ephemeral host.
 Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
 A premium is placed on keeping this image as small as is reasonable given its intended purpose.
 For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size to 7.9 GB - a 6GB increase.
+However, `seclists` is installed even though it is a large dataset because those wordlist files are commonly used.
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
 ![Dive image efficiency](resources/dive-efficiency.png)
 
-<small>Last checked: 2020-03-09</small>
+<small>Last checked: 2020-03-15</small>
 
 The container is not meant for a persistent attacker environment.
 The intention is for a quick environment to run attacks and document the results outside of the container.
@@ -79,8 +80,7 @@ docker stop kali && docker rm kali
 
 ## Configured tools
 
-- Metasploit / Meterpreter
-  - PostgreSQL 12
+- Amass
 - [AutoRecon](https://github.com/Tib3rius/AutoRecon)
   - curl
   - enum4linux
@@ -99,14 +99,16 @@ docker stop kali && docker rm kali
   - tnscmd10g
   - whatweb
   - wkhtmltoimage
-- Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
-- Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
-- JohnTheRipper (jumbo)
-- Seclists wordlist (/usr/share/seclists)
-- Rockyou wordlist (/usr/share/wordlists)
-- SQLMap
 - Hydra
+- JohnTheRipper (jumbo)
+- Metasploit / Meterpreter
+  - PostgreSQL 12
+- Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
+- Rockyou wordlist (/usr/share/wordlists/rockyou.txt)
+- Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
+- Seclists wordlist (/usr/share/seclists)
 - SSLyze
+- SQLMap
 
 ## Contributions
 
