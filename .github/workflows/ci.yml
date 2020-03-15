@@ -45,10 +45,10 @@ jobs:
       run: docker exec -t $container which hydra
     
     - name: Check for Seclists presence
-      run: ls /usr/share/seclists
+      run: docker exec -t $container ls /usr/share/seclists
     
     - name: Check for rockyou presence
-      run: ls /usr/share/wordlists/rockyou.txt
+      run: docker exec -t $container ls /usr/share/wordlists/rockyou.txt
     
     - name: Clean up the running container
       run: docker stop $container
