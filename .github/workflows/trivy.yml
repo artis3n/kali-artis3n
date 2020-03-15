@@ -12,10 +12,19 @@ jobs:
       container: artis3n/kali
     steps:
       - name: Pull docker image
-        run: docker pull ${{ env.container }}
+        run: docker pull ${{ env.container }}:latest
+      
+      - name: Pull base docker image
+        run: docker pull ${{ env.container }}:latest-no-wordlists
+      
+      - uses: homoluctus/gitrivy@master
+        with:
+          token: ${{ github.token }}
+          image: "${{ env.container }}:latest-no-wordlists"
+          issue_title: Trivy Scan Results - Base image
 
       - uses: homoluctus/gitrivy@master
         with:
           token: ${{ github.token }}
-          image: "${{ env.container }}"
-          issue_title: Trivy Scan Results
+          image: "${{ env.container }}:latest"
+          issue_title: Trivy Scan Results - Full image

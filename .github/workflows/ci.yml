@@ -7,15 +7,15 @@ env:
 
 jobs:
 
-  build:
+  base:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the Docker image in the background
-      run: docker build -t $container .
+    - name: Build the Docker BASE image in the background
+      run: docker build --target base -t $container .
 
     - name: Run the Docker image, making sure it stays up for these tests
       run: docker run --name $container -id --rm $container
@@ -43,6 +43,18 @@ jobs:
     
     - name: Verify that hydra is available
       run: docker exec -t $container which hydra
+    
+    - name: Clean up the running container
+      run: docker stop $container
+  
+  full:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Docker WORDLISTS image in the background
+      run: docker build --target wordlists -t $container .
     
     - name: Check for Seclists presence
       run: docker exec -t $container ls /usr/share/seclists

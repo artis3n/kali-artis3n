@@ -20,10 +20,24 @@ Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
 A premium is placed on keeping this image as small as is reasonable given its intended purpose.
 For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size by 6GB increase.
-However, `seclists` is installed even though it increases the build image by 1.6 GB because those wordlist files are commonly used.
+
+## Wordlists
+
+Seclists and Rockyou are pre-installed by default in the `latest` and semver tags, e.g. `1`, `1.2.0`. This increases the image size by 1.64 GB. Therefore, if you do not need wordlists, you can use the `tagname-no-wordlists` tag. For example:
+
+```bash
+docker pull artis3n/kali:latest-no-wordlists
+```
+
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
-![Dive image efficiency](resources/dive-efficiency.png)
+With wordlists:
+
+![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png)
+
+Without wordlists:
+
+![Dive image without wordlists efficiency](resources/dive-efficiency-base.png)
 
 <small>Last checked: 2020-03-15</small>
 
@@ -124,3 +138,7 @@ A pull request is also welcome.
 
 For any new tools, you must add validation tests to `.github/workflows/ci.yml`. Use the existing tests as a baseline.
 These tests ensure the tools are installed and pre-configured correctly.
+
+### Recognition
+
+Thanks @AnitGandhi for help optimizing my Dockerfile and build images.
