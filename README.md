@@ -13,14 +13,14 @@ A kalilinux/kali-rolling container with extra juice.
 
 The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with no pre-installed services.
 It is meant to be lightweight and clocks in around 118 MB.
-This container, uncompressed, is around 2.0 GB.
+This container, uncompressed, is around 3.5 GB.
 It installs and pre-configures a number of frequently uses Kali tools.
 It is meant to allow you to quickly get up and running with a Kali environment on an ephemeral host.
 Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
 A premium is placed on keeping this image as small as is reasonable given its intended purpose.
-For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size to 7.9 GB - a 6GB increase.
-However, `seclists` is installed even though it is a large dataset because those wordlist files are commonly used.
+For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size by 6GB increase.
+However, `seclists` is installed even though it increases the build image by 1.6 GB because those wordlist files are commonly used.
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
 ![Dive image efficiency](resources/dive-efficiency.png)

@@ -6,4 +6,4 @@ install:
 
 .PHONY: size
 size:
-	dive build --no-cache test/kali .
+	dive build --no-cache -t test/kali .
