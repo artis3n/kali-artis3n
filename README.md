@@ -5,8 +5,6 @@ A kalilinux/kali-rolling container with extra juice.
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/artis3n/kali-artis3n/Docker%20Image%20CI)](https://github.com/artis3n/kali-artis3n/actions)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/kali-artis3n)](https://github.com/artis3n/kali-artis3n/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/artis3n/kali)](https://hub.docker.com/r/artis3n/kali)
-![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest?label=Full%20image%2C%20compressed)
-![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest-no-wordlists?label=No%20wordlists%2C%20compressed)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/kali-artis3n)
 ![GitHub](https://img.shields.io/github/license/artis3n/kali-artis3n)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
@@ -35,6 +33,9 @@ docker pull artis3n/kali:latest-no-wordlists
 Currently, only `latest` is built without wordlists, as `latest-no-wordlists`. The semver tags (e.g. `1`, `1.2`, `1.2.0`) are built with wordlists.
 
 ## Image efficiency (Dive)
+
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest?label=Full%20image%2C%20compressed)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest-no-wordlists?label=No%20wordlists%2C%20compressed)
 
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
