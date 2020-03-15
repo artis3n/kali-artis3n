@@ -39,13 +39,10 @@ Currently, only `latest` is built without wordlists, as `latest-no-wordlists`. T
 
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
-With wordlists:
-
-![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png)
-
-Without wordlists:
-
-![Dive image without wordlists efficiency](resources/dive-efficiency-base.png)
+| Image condition | Image Size |
+| --- | --- |
+| With wordlists | ![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png) |
+| Without wordlists | ![Dive image without wordlists efficiency](resources/dive-efficiency-base.png) |
 
 <small>Last checked: 2020-03-15</small>
 
