@@ -31,6 +31,8 @@ Seclists and Rockyou are pre-installed by default in the `latest` and semver tag
 docker pull artis3n/kali:latest-no-wordlists
 ```
 
+Currently, only `latest` is built without wordlists, as `latest-no-wordlists`. The semver tags (e.g. `1`, `1.2`, `1.2.0`) are built with wordlists.
+
 ## Image efficiency (Dive)
 
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
@@ -145,4 +147,4 @@ These tests ensure the tools are installed and pre-configured correctly.
 
 ### Recognition
 
-Thanks @AnitGandhi for help optimizing the Dockerfile and build images.
+Thanks @anitgandhi for help optimizing the Dockerfile and build images.

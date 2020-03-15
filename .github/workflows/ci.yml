@@ -7,16 +7,11 @@ env:
 
 jobs:
 
-  ci:
-
+  base:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-
-    ###########################
-    # BASE image              #
-    ###########################
 
     - name: Build the Docker BASE image in the background
       run: docker build --target base -t $container:base .
@@ -50,10 +45,12 @@ jobs:
     
     - name: Clean up the running container
       run: docker stop $container
-    
-    ###########################
-    # WORDLISTS image         #
-    ###########################
+  
+  wordlists:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
 
     - name: Build the Docker WORDLISTS image in the background
       run: docker build --target wordlists -t $container:wordlists .
@@ -69,3 +66,4 @@ jobs:
     
     - name: Clean up the running container
       run: docker stop $container
+

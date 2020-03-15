@@ -15,9 +15,8 @@ jobs:
         uses: technote-space/release-github-actions@v3
         with:
           GITHUB_TOKEN: ${{ github.token }}
-
-  deploy:
-
+  
+  deploy-github:
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +51,13 @@ jobs:
         registry: docker.pkg.github.com
         buildoptions: "--target base"
         tags: "latest-no-wordlists"
+  
+  deploy-hub:
+    runs-on: ubuntu-latest
 
+    steps:
+    - uses: actions/checkout@v2
+    
     - name: Deploy the Docker image to Docker Hub - Semver (Wordlists)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
