@@ -25,7 +25,7 @@ Don't spend time configuring and tweaking - pull, run, execute, pwn.
 A premium is placed on keeping this image as small as is reasonable given its intended purpose.
 For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size by 6GB.
 
-Seclists and Rockyou are pre-installed by default in the `latest` and semver tags, e.g. `1`, `1.2.0`. This increases the image size by 1.5 GB. Therefore, if you do not need wordlists, you can use the `<tagname>-no-wordlists` tag. For example:
+Seclists and Rockyou are pre-installed by default in the `latest` and semver tags, e.g. `1`, `1.2`, `1.2.0`. This increases the image size by 1.5 GB. Therefore, if you do not need wordlists, you can use the `<tagname>-no-wordlists` tag. For example:
 
 ```bash
 docker pull artis3n/kali:latest-no-wordlists
@@ -60,8 +60,10 @@ Download the image:
 
 ```bash
 docker pull artis3n/kali:latest
+docker pull artis3n/kali:latest-no-wordlists
 # or
 docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest
+docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest-no-wordlists
 ```
 
 Run the container:
