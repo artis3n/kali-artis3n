@@ -13,21 +13,25 @@ A kalilinux/kali-rolling container with extra juice.
 
 The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with no pre-installed services.
 It is meant to be lightweight and clocks in around 118 MB.
-This container, uncompressed, is around 3.5 GB.
+You must configure every service and tool you need from that base image.
+
+This container, uncompressed, is around 3.5 GB (or 2.0 GB without wordlists).
 It installs and pre-configures a number of frequently uses Kali tools.
 It is meant to allow you to quickly get up and running with a Kali environment on an ephemeral host.
 Don't spend time configuring and tweaking - pull, run, execute, pwn.
 
-A premium is placed on keeping this image as small as is reasonable given its intended purpose.
-For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size by 6GB increase.
-
 ## Wordlists
 
-Seclists and Rockyou are pre-installed by default in the `latest` and semver tags, e.g. `1`, `1.2.0`. This increases the image size by 1.64 GB. Therefore, if you do not need wordlists, you can use the `tagname-no-wordlists` tag. For example:
+A premium is placed on keeping this image as small as is reasonable given its intended purpose.
+For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size by 6GB.
+
+Seclists and Rockyou are pre-installed by default in the `latest` and semver tags, e.g. `1`, `1.2.0`. This increases the image size by 1.5 GB. Therefore, if you do not need wordlists, you can use the `<tagname>-no-wordlists` tag. For example:
 
 ```bash
 docker pull artis3n/kali:latest-no-wordlists
 ```
+
+## Image efficiency (Dive)
 
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
@@ -141,4 +145,4 @@ These tests ensure the tools are installed and pre-configured correctly.
 
 ### Recognition
 
-Thanks @AnitGandhi for help optimizing my Dockerfile and build images.
+Thanks @AnitGandhi for help optimizing the Dockerfile and build images.
