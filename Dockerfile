@@ -1,7 +1,7 @@
-FROM kalilinux/kali-rolling:latest
+FROM kalilinux/kali-rolling:latest AS base
 LABEL maintainer="Artis3n <dev@artis3nal.com>"
 
-ENV TERM=xterm
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends amass awscli curl \
@@ -20,6 +20,7 @@ RUN apt-get update \
     # Remove apt-get cache from the layer to reduce container size
     && rm -rf /var/lib/apt/lists/*
 
+# Initialize Metasploit database
 RUN service postgresql start && msfdb init
 
 # Install and configure AutoRecon
@@ -29,10 +30,18 @@ RUN mkdir /tools \
     && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
+ENV TERM=xterm
+
+# Need to start postgresql any time the container comes up
+# systemctl enable postgresql doesn't seem to take effect
+# I blame systemd, but this works at least
+CMD service postgresql start && /bin/bash
+
+FROM base AS wordlists
+
 # Install Seclists
 RUN mkdir -p /usr/share/seclists \
-    # This clone takes a million years.
-    # The apt-get install seclists command doesn't work from the Dockerfile, however.
+    # The apt-get install seclists command isn't installing the wordlists, so clone the repo.
     && git clone --depth 1 https://github.com/danielmiessler/SecLists.git /usr/share/seclists
 
 # Prepare rockyou wordlist
@@ -40,8 +49,3 @@ RUN mkdir -p /usr/share/wordlists \
     && cp /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt.tar.gz /usr/share/wordlists/ \
     && cd /usr/share/wordlists \
     && tar -xzf rockyou.txt.tar.gz
-
-# Need to start postgresql any time the container comes up
-# systemctl enable postgresql doesn't seem to take effect
-# I blame systemd, but this works at least
-CMD service postgresql start && /bin/bash
