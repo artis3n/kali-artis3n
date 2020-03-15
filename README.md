@@ -151,4 +151,4 @@ These tests ensure the tools are installed and pre-configured correctly.
 
 ### Recognition
 
-Thanks @anitgandhi for help optimizing the Dockerfile and build images.
+Thanks [Anit Gandhi](https://github.com/anitgandhi) for help optimizing the Dockerfile and build images.
