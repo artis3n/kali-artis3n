@@ -26,19 +26,40 @@ jobs:
       with:
         ref: master
 
-    - name: Deploy the Docker image to GitHub Package Registry
+    - name: Deploy the Docker image to GitHub Package Registry (Wordlists)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: artis3n/kali-artis3n/kali
         username: ${{ github.actor }}
         password: ${{ github.token }}
         registry: docker.pkg.github.com
+        buildoptions: "--target wordlists"
         tags: "latest,daily"
+    
+    - name: Deploy the Docker image to GitHub Package Registry (Base)
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n/kali
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+        registry: docker.pkg.github.com
+        buildoptions: "--target base"
+        tags: "latest-no-wordlists,daily-no-wordlists"
 
-    - name: Deploy the Docker image to Docker Hub
+    - name: Deploy the Docker image to Docker Hub (Wordlists)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: artis3n/kali
         username: ${{ secrets.docker_username }}
         password: ${{ secrets.docker_password }}
+        buildoptions: "--target wordlists"
         tags: "latest,daily"
+    
+    - name: Deploy the Docker image to Docker Hub (Base)
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali
+        username: ${{ secrets.docker_username }}
+        password: ${{ secrets.docker_password }}
+        buildoptions: "--target base"
+        tags: "latest-no-wordlists,daily-no-wordlists"
