@@ -102,8 +102,8 @@ docker stop kali && docker rm kali
 Alias a command to your container, run commands through the container from your terminal:
 
 ```bash
-alias kali="docker exec -t kali"
-kali searchsploit tomcat
+alias kali="docker exec -it kali"
+kali sqlmap -u ...
 ```
 
 ## Configured tools
