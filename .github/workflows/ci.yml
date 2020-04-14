@@ -44,7 +44,7 @@ jobs:
       run: docker exec -t $container which john
 
     - name: Verify that zip2john is available
-      run: docker exec -t $container zip2john
+      run: docker exec -t $container which zip2john
     
     - name: Verify that hydra is available
       run: docker exec -t $container which hydra
