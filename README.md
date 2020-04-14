@@ -128,6 +128,7 @@ kali sqlmap -u ...
   - whatweb
   - wkhtmltoimage
 - Hydra
+- [Impacket](https://github.com/SecureAuthCorp/impacket) scripts
 - JohnTheRipper (jumbo)
 - Metasploit / Meterpreter
   - PostgreSQL 12
