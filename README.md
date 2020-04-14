@@ -5,8 +5,6 @@ A kalilinux/kali-rolling container with extra juice.
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/artis3n/kali-artis3n/Docker%20Image%20CI)](https://github.com/artis3n/kali-artis3n/actions)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/kali-artis3n)](https://github.com/artis3n/kali-artis3n/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/artis3n/kali)](https://hub.docker.com/r/artis3n/kali)
-![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest?label=Full%20image%2C%20compressed)
-![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest-no-wordlists?label=No%20wordlists%2C%20compressed)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/kali-artis3n)
 ![GitHub](https://img.shields.io/github/license/artis3n/kali-artis3n)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
@@ -36,15 +34,15 @@ Currently, only `latest` is built without wordlists, as `latest-no-wordlists`. T
 
 ## Image efficiency (Dive)
 
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest?label=Full%20image%2C%20compressed)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/artis3n/kali/latest-no-wordlists?label=No%20wordlists%2C%20compressed)
+
 Efficiency of the build image is checked with [dive](https://github.com/wagoodman/dive):
 
-With wordlists:
-
-![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png)
-
-Without wordlists:
-
-![Dive image without wordlists efficiency](resources/dive-efficiency-base.png)
+| Image condition | Image Size |
+| --- | --- |
+| With wordlists | ![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png) |
+| Without wordlists | ![Dive image without wordlists efficiency](resources/dive-efficiency-base.png) |
 
 <small>Last checked: 2020-03-15</small>
 
@@ -104,8 +102,8 @@ docker stop kali && docker rm kali
 Alias a command to your container, run commands through the container from your terminal:
 
 ```bash
-alias kali="docker exec -t kali"
-kali searchsploit tomcat
+alias kali="docker exec -it kali"
+kali sqlmap -u ...
 ```
 
 ## Configured tools
@@ -130,13 +128,17 @@ kali searchsploit tomcat
   - whatweb
   - wkhtmltoimage
 - Hydra
+- [Impacket](https://github.com/SecureAuthCorp/impacket) scripts
 - JohnTheRipper (jumbo)
 - Metasploit / Meterpreter
   - PostgreSQL 12
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
 - Rockyou wordlist (/usr/share/wordlists/rockyou.txt)
+  - Wordlists / Latest image only
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 - Seclists wordlist (/usr/share/seclists)
+  - Wordlists / Latest image only
+- Socat
 - SSLyze
 - SQLMap
 
@@ -150,4 +152,4 @@ These tests ensure the tools are installed and pre-configured correctly.
 
 ### Recognition
 
-Thanks @anitgandhi for help optimizing the Dockerfile and build images.
+Thanks [Anit Gandhi](https://github.com/anitgandhi) for help optimizing the Dockerfile and build images.
