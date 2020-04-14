@@ -38,10 +38,16 @@ jobs:
       run: docker exec -t $container aws --version
     
     - name: Verify that john the ripper is available
-      run: docker exec -t $container john -h
+      run: docker exec -t $container which john
+
+    - name: Verify that zip2john is available
+      run: docker exec -t $container zip2john
     
     - name: Verify that hydra is available
       run: docker exec -t $container which hydra
+    
+    - name: Verify that socat is available
+      run: docker exec -t $container which socat
     
     - name: Clean up the running container
       run: docker stop $container

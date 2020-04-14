@@ -7,7 +7,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends amass awscli curl \
     exploitdb file git hydra john less lsof man-db \
     metasploit-framework nmap python3 python3-pip python3-setuptools \
-    python3-wheel ssh-client sslyze sqlmap systemd vim zip \
+    python3-wheel socat ssh-client sslyze sqlmap systemd vim zip \
     # autorecon dependencies
     enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba \
     smbclient smbmap smtp-user-enum snmpcheck sslscan tnscmd10g whatweb \
@@ -38,6 +38,8 @@ ENV TERM=xterm
 CMD service postgresql start && /bin/bash
 
 FROM base AS wordlists
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Seclists
 RUN mkdir -p /usr/share/seclists \
