@@ -133,8 +133,10 @@ kali sqlmap -u ...
   - PostgreSQL 12
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
 - Rockyou wordlist (/usr/share/wordlists/rockyou.txt)
+  - Wordlists / Latest image only
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 - Seclists wordlist (/usr/share/seclists)
+  - Wordlists / Latest image only
 - SSLyze
 - SQLMap
 
