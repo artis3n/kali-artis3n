@@ -139,7 +139,6 @@ kali sqlmap -u ...
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 - Seclists wordlist (/usr/share/seclists)
   - Wordlists / Latest image only
-- Socat
 - SSLyze
 - SQLMap
 
