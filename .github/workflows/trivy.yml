@@ -5,32 +5,17 @@ on:
     - cron: '0 9 * * *'
 
 jobs:
-  base:
-    name: Daily Vulnerability Scan - Base
+  scan:
+    name: Daily Vulnerability Scan
     runs-on: ubuntu-latest
     env:
       container: artis3n/kali
     steps:
       - name: Pull base docker image
-        run: docker pull ${{ env.container }}:latest-no-wordlists
+        run: docker pull ${{ env.container }}:latest
       
       - uses: homoluctus/gitrivy@7adbcc6258fcb1e562903ff4ec5ff5aaea935987 # v2.0.0
         with:
           token: ${{ github.token }}
-          image: "${{ env.container }}:latest-no-wordlists"
-          issue_title: Trivy Scan Results - Base image
-
-  wordlists:
-    name: Daily Vulnerability Scan - Wordlists
-    runs-on: ubuntu-latest
-    env:
-      container: artis3n/kali
-    steps:
-      - name: Pull docker image
-        run: docker pull ${{ env.container }}:latest
-
-      - uses: homoluctus/gitrivy@7adbcc6258fcb1e562903ff4ec5ff5aaea935987 # v2.0.0
-        with:
-          token: ${{ github.token }}
           image: "${{ env.container }}:latest"
-          issue_title: Trivy Scan Results - Full image
+          issue_title: Trivy Scan Results - Base image
