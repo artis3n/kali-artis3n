@@ -18,4 +18,4 @@ jobs:
         with:
           token: ${{ github.token }}
           image: "${{ env.container }}:latest"
-          issue_title: Trivy Scan Results - Base image
+          issue_title: Trivy Scan Results
