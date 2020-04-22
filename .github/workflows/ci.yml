@@ -52,6 +52,9 @@ jobs:
     - name: Verify that socat is available
       run: docker exec -t $container which socat
     
+    - name: Verify that dotdotpwn is available
+      run: docker exec -t $container which dotdotpwn
+    
     - name: Clean up the running container
       run: docker stop $container
   
