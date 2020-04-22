@@ -5,8 +5,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends amass awscli curl \
-    exploitdb file git hydra impacket-scripts john less lsof man-db \
-    metasploit-framework nmap python3 python3-pip python3-setuptools \
+    dotdotpwn exploitdb file git hydra impacket-scripts john less lsof \
+    man-db metasploit-framework nmap python3 python3-pip python3-setuptools \
     python3-wheel socat ssh-client sslyze sqlmap systemd vim zip \
     # autorecon dependencies
     enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba \
