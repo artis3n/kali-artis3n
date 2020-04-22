@@ -128,6 +128,7 @@ kali sqlmap -u ...
   - whatweb
   - wkhtmltoimage
 - Hydra
+- [Impacket](https://github.com/SecureAuthCorp/impacket) scripts
 - JohnTheRipper (jumbo)
 - Metasploit / Meterpreter
   - PostgreSQL 12
@@ -137,6 +138,7 @@ kali sqlmap -u ...
 - Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
 - Seclists wordlist (/usr/share/seclists)
   - Wordlists / Latest image only
+- Socat
 - SSLyze
 - SQLMap
 
