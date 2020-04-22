@@ -127,6 +127,7 @@ kali sqlmap -u ...
   - tnscmd10g
   - whatweb
   - wkhtmltoimage
+- DotDotPwn
 - Hydra
 - [Impacket](https://github.com/SecureAuthCorp/impacket) scripts
 - JohnTheRipper (jumbo)
