@@ -133,6 +133,7 @@ kali sqlmap -u ...
 - JohnTheRipper (jumbo)
 - Metasploit / Meterpreter
   - PostgreSQL 12
+- Netcat
 - Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
 - Rockyou wordlist (/usr/share/wordlists/rockyou.txt)
   - Wordlists / Latest image only
