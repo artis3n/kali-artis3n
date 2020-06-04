@@ -49,8 +49,8 @@ jobs:
     - name: Verify that hydra is available
       run: docker exec -t $container which hydra
     
-    - name: Verify that socat is available
-      run: docker exec -t $container which socat
+    - name: Verify that netcat is available
+      run: docker exec -t $container which nc
     
     - name: Verify that dotdotpwn is available
       run: docker exec -t $container which dotdotpwn
