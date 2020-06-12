@@ -10,15 +10,15 @@ install:
 
 .PHONY: size-base
 size-base:
-	dive build --no-cache --target base -t test/kali .
+	dive build --target base -t test/kali:base .
 
 .PHONY: size-wordlists
 size-wordlists:
-	dive build --no-cache --target wordlists -t test/kali .
+	dive build --target wordlists -t test/kali:wordlists .
 
 .PHONY: size
 size:
-	dive build --no-cache -t test/kali .
+	dive build -t test/kali:full .
 
 .PHONY: build
 build: build-all
@@ -26,10 +26,10 @@ build: build-all
 .PHONY: build-all
 build-all: build-base build-full
 
-.PHONY: build-base
-build-base:
+.PHONY: base
+base:
 	docker build --target base -t test/kali:base .
 
-.PHONY: build-full
-build-full:
+.PHONY: full
+full:
 	docker build --target wordlists -t test/kali:full .

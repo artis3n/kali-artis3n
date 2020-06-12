@@ -5,23 +5,27 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends amass awscli curl \
-    dotdotpwn exploitdb file git hydra impacket-scripts john less lsof \
-    man-db metasploit-framework netcat nmap python3 python3-pip python3-setuptools \
-    python3-wheel socat ssh-client sslyze sqlmap systemd vim zip \
+    dotdotpwn file git hydra impacket-scripts john less locate lsof \
+    man-db netcat nmap python3 python3-pip python3-setuptools \
+    python3-wheel socat ssh-client sslyze sqlmap systemctl vim zip \
     # autorecon dependencies
     enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba \
     smbclient smbmap smtp-user-enum snmpcheck sslscan tnscmd10g whatweb \
-    # Has to run after systemd is installed
-    # Needed for msfdb init
-    && apt-get install -y --no-install-recommends systemctl \
     # Slim down layer size
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     # Remove apt-get cache from the layer to reduce container size
     && rm -rf /var/lib/apt/lists/*
 
-# Initialize Metasploit database
-RUN service postgresql start && msfdb init
+# Second set of installs to slim the layers a bit
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    exploitdb metasploit-framework \
+    # Slim down layer size
+    && apt-get autoremove -y \
+    && apt-get autoclean -y \
+    # Remove apt-get cache from the layer to reduce container size
+    && rm -rf /var/lib/apt/lists*
 
 # Install and configure AutoRecon
 RUN mkdir /tools \
@@ -30,12 +34,9 @@ RUN mkdir /tools \
     && pip3 install -r requirements.txt \
     && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
-ENV TERM=xterm
+ENV TERM=xterm-256color
 
-# Need to start postgresql any time the container comes up
-# systemctl enable postgresql doesn't seem to take effect
-# I blame systemd, but this works at least
-CMD service postgresql start && /bin/bash
+ENTRYPOINT ["/bin/bash"]
 
 FROM base AS wordlists
 
