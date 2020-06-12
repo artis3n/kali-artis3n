@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: master
+        ref: main
 
     - name: Deploy the Docker image to GitHub Package Registry (Wordlists)
       uses: elgohr/Publish-Docker-Github-Action@master
