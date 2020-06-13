@@ -7,7 +7,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends amass awscli curl \
     dotdotpwn file git hydra impacket-scripts john less locate lsof \
     man-db netcat nmap python3 python3-pip python3-setuptools \
-    python3-wheel socat ssh-client sslyze sqlmap systemctl vim zip \
+    python3-wheel socat ssh-client sslyze sqlmap vim zip \
     # autorecon dependencies
     enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba \
     smbclient smbmap smtp-user-enum snmpcheck sslscan tnscmd10g whatweb \
