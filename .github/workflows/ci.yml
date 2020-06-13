@@ -16,13 +16,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the Docker BASE image in the background
+    - name: Build the Docker BASE image
       run: docker build --target base -t $container:base .
 
     - name: Run the Docker image, making sure it stays up for these tests
       run: docker run --name $container -id --rm $container:base
 
-    - name: Verify AutoRecon is available in the container
+    - name: Verify that AutoRecon is available in the container
       run: docker exec -t $container autorecon -h
 
     - name: Verify that Proxychains-ng is available in the container
@@ -61,7 +61,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the Docker WORDLISTS image in the background
+    - name: Build the Docker WORDLISTS image
       run: docker build --target wordlists -t $container:wordlists .
     
     - name: Run the Docker image, making sure it stays up for these tests
