@@ -28,9 +28,6 @@ jobs:
     - name: Verify that Proxychains-ng is available in the container
       run: docker exec -t $container which proxychains4
     
-    - name: Verify that MSFDB is initialized
-      run: docker exec -t $container msfdb status
-    
     - name: Verify that msfconsole is available in the container
       run: docker exec -t $container msfconsole -v
     
