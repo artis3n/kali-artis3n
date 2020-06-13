@@ -18,18 +18,22 @@ size-wordlists:
 
 .PHONY: size
 size:
-	dive build -t test/kali:full .
+	dive build -t test/kali:latest .
 
 .PHONY: build
 build: build-all
 
 .PHONY: build-all
-build-all: build-base build-full
+build-all: base wordlists latest
 
 .PHONY: base
 base:
 	docker build --target base -t test/kali:base .
 
-.PHONY: full
+.PHONY: wordlists
 full:
-	docker build --target wordlists -t test/kali:full .
+	docker build --target wordlists -t test/kali:wordlists .
+
+.PHONY: latest
+latest:
+	docker build --target wordlists -t test/kali .

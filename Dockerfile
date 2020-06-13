@@ -32,7 +32,7 @@ RUN mkdir /tools \
     && git clone --depth 1 https://github.com/Tib3rius/AutoRecon.git /tools/AutoRecon \
     && cd /tools/AutoRecon \
     && pip3 install -r requirements.txt \
-    && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
+    && ln -s /tools/AutoRecon/src/autorecon/autorecon.py /usr/local/bin/autorecon
 
 ENV TERM=xterm-256color
 
