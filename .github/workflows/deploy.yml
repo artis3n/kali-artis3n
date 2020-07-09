@@ -33,16 +33,6 @@ jobs:
         buildoptions: "--target wordlists"
         tag_semver: true
 
-    - name: Deploy the Docker image to GitHub Package Registry - Latest (Wordlists)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali-artis3n/kali
-        username: ${{ github.actor }}
-        password: ${{ github.token }}
-        registry: docker.pkg.github.com
-        buildoptions: "--target wordlists"
-        tags: "latest"
-    
     - name: Deploy the Docker image to GitHub Package Registry - Latest (Base)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -53,6 +43,16 @@ jobs:
         buildoptions: "--target base"
         tags: "latest-no-wordlists"
 
+    - name: Deploy the Docker image to GitHub Package Registry - Latest (Wordlists)
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali-artis3n/kali
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+        registry: docker.pkg.github.com
+        buildoptions: "--target wordlists"
+        tags: "latest"
+
     - name: Deploy the Docker image to Docker Hub - Semver (Wordlists)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -62,15 +62,6 @@ jobs:
         buildoptions: "--target wordlists"
         tag_semver: true
     
-    - name: Deploy the Docker image to Docker Hub - Latest (Wordlists)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali
-        username: ${{ secrets.docker_username }}
-        password: ${{ secrets.docker_password }}
-        buildoptions: "--target wordlists"
-        tags: "latest"
-    
     - name: Deploy the Docker image to Docker Hub - Latest (Base)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -79,3 +70,12 @@ jobs:
         password: ${{ secrets.docker_password }}
         buildoptions: "--target base"
         tags: "latest-no-wordlists"
+    
+    - name: Deploy the Docker image to Docker Hub - Latest (Wordlists)
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: artis3n/kali
+        username: ${{ secrets.docker_username }}
+        password: ${{ secrets.docker_password }}
+        buildoptions: "--target wordlists"
+        tags: "latest"
