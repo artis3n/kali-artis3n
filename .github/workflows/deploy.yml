@@ -32,7 +32,7 @@ jobs:
         registry: docker.pkg.github.com
         buildoptions: "--target wordlists"
         tag_semver: true
-    
+
     - name: Deploy the Docker image to GitHub Package Registry - Latest (Base)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
