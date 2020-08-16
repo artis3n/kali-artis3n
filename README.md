@@ -22,7 +22,7 @@ Don't spend time configuring and tweaking - pull, run, execute, pwn.
 ## Wordlists
 
 A premium is placed on keeping this image as small as is reasonable given its intended purpose.
-For example, `searchploit` is installed in this image but `searchsploit -u` is not run to install exploitdb-papers because this increases the image size by 6GB.
+For example, `searchploit` is installed in this image but `exploitdb-papers` is not installed because this increases the image size by 6GB.
 
 Seclists and Rockyou are pre-installed by default in the `latest` and semver tags, e.g. `1`, `1.2`, `1.2.0`. This increases the image size by 1.5 GB. Therefore, if you do not need wordlists, you can use the `<tagname>-no-wordlists` tag. For example:
 
@@ -44,7 +44,7 @@ Efficiency of the build image is checked with [dive](https://github.com/wagoodma
 | With wordlists | ![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png) |
 | Without wordlists | ![Dive image without wordlists efficiency](resources/dive-efficiency-base.png) |
 
-<small>Last checked: 2020-06-12</small>
+<small>Last checked: 2020-08-16</small>
 
 The container is not meant for a persistent attacker environment.
 The intention is for a quick environment to run attacks and document the results outside of the container.
