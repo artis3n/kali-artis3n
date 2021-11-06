@@ -78,6 +78,8 @@ jobs:
         with:
           command: build
           arguments: "-on-error=abort -only=kali-base.docker.kali-base -var final_image_name=$container"
+        env:
+          PACKER_LOG: 1
 
       - name: Run the Docker image, making sure it stays up for these tests
         run: docker run --name $container -id --rm $container:base
@@ -137,6 +139,8 @@ jobs:
         with:
           command: build
           arguments: "-on-error=abort -only=kali-final.docker.kali-final -var final_image_name=$container"
+        env:
+          PACKER_LOG: 1
       
       - name: Run the Docker image, making sure it stays up for these tests
         run: docker run --name $container -id --rm $container:wordlists
