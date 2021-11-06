@@ -1,3 +1,4 @@
+---
 name: Deploy Docker Image
 
 on:
@@ -7,75 +8,54 @@ on:
 
 jobs:
 
-  release:
-    name: Release GitHub Actions
-    runs-on: ubuntu-latest
-    steps:
-      - name: Release GitHub Actions
-        uses: technote-space/release-github-actions@v3
-        with:
-          GITHUB_TOKEN: ${{ github.token }}
-
   deploy:
 
     runs-on: ubuntu-latest
+    environment: release
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Deploy the Docker image to GitHub Package Registry - Semver (Wordlists)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali-artis3n/kali
-        username: ${{ github.actor }}
-        password: ${{ github.token }}
-        registry: docker.pkg.github.com
-        buildoptions: "--target wordlists"
-        tag_semver: true
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            artis3n/kali
+            ghcr.io/artis3n/kali
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
-    - name: Deploy the Docker image to GitHub Package Registry - Latest (Base)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali-artis3n/kali
-        username: ${{ github.actor }}
-        password: ${{ github.token }}
-        registry: docker.pkg.github.com
-        buildoptions: "--target base"
-        tags: "latest-no-wordlists"
-
-    - name: Deploy the Docker image to GitHub Package Registry - Latest (Wordlists)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali-artis3n/kali
-        username: ${{ github.actor }}
-        password: ${{ github.token }}
-        registry: docker.pkg.github.com
-        buildoptions: "--target wordlists"
-        tags: "latest"
-
-    - name: Deploy the Docker image to Docker Hub - Semver (Wordlists)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali
-        username: ${{ secrets.docker_username }}
-        password: ${{ secrets.docker_password }}
-        buildoptions: "--target wordlists"
-        tag_semver: true
-    
-    - name: Deploy the Docker image to Docker Hub - Latest (Base)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali
-        username: ${{ secrets.docker_username }}
-        password: ${{ secrets.docker_password }}
-        buildoptions: "--target base"
-        tags: "latest-no-wordlists"
-    
-    - name: Deploy the Docker image to Docker Hub - Latest (Wordlists)
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: artis3n/kali
-        username: ${{ secrets.docker_username }}
-        password: ${{ secrets.docker_password }}
-        buildoptions: "--target wordlists"
-        tags: "latest"
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build and Push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64,darwin/amd64,darwin/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -1,3 +1,4 @@
+---
 name: Docker Image CI
 
 on:
@@ -10,69 +11,137 @@ env:
 
 jobs:
 
+  lint:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Initialize Packer
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: docker.pkr.hcl
+  
+  docker-build:
+    runs-on: ubuntu-latest
+    environment: dev
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+    
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Build multi-arch
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64,darwin/amd64,darwin/arm64
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
   base:
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Build the Docker BASE image
-      run: docker build --target base -t $container:base .
+      - name: Initialize Packer
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
 
-    - name: Run the Docker image, making sure it stays up for these tests
-      run: docker run --name $container -id --rm $container:base
+      - name: Build the Docker BASE image
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-on-error=abort -only='kali-base.docker.kali-base' -var 'final_image_name=$container'"
+          target: docker.pkr.hcl
 
-    - name: Verify that AutoRecon is available in the container
-      run: docker exec -t $container autorecon -h
+      - name: Run the Docker image, making sure it stays up for these tests
+        run: docker run --name $container -id --rm $container:base
 
-    - name: Verify that Proxychains-ng is available in the container
-      run: docker exec -t $container which proxychains4
-    
-    - name: Verify that msfconsole is available in the container
-      run: docker exec -t $container msfconsole -v
-    
-    - name: Verify that sqlmap is available
-      run: docker exec -t $container sqlmap --version
-    
-    - name: Verify that the aws CLI is available
-      run: docker exec -t $container aws --version
-    
-    - name: Verify that john the ripper is available
-      run: docker exec -t $container which john
+      - name: Verify that AutoRecon is available in the container
+        run: docker exec -t $container autorecon -h
 
-    - name: Verify that zip2john is available
-      run: docker exec -t $container which zip2john
+      - name: Verify that Proxychains-ng is available in the container
+        run: docker exec -t $container which proxychains4
+      
+      - name: Verify that msfconsole is available in the container
+        run: docker exec -t $container msfconsole -v
+      
+      - name: Verify that sqlmap is available
+        run: docker exec -t $container sqlmap --version
+      
+      - name: Verify that the aws CLI is available
+        run: docker exec -t $container aws --version
+      
+      - name: Verify that john the ripper is available
+        run: docker exec -t $container which john
+
+      - name: Verify that zip2john is available
+        run: docker exec -t $container which zip2john
+      
+      - name: Verify that hydra is available
+        run: docker exec -t $container which hydra
+      
+      - name: Verify that netcat is available
+        run: docker exec -t $container which nc
+      
+      - name: Verify that dotdotpwn is available
+        run: docker exec -t $container which dotdotpwn
+      
+      - name: Clean up the running container
+        run: docker stop $container
     
-    - name: Verify that hydra is available
-      run: docker exec -t $container which hydra
-    
-    - name: Verify that netcat is available
-      run: docker exec -t $container which nc
-    
-    - name: Verify that dotdotpwn is available
-      run: docker exec -t $container which dotdotpwn
-    
-    - name: Clean up the running container
-      run: docker stop $container
-  
   wordlists:
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Build the Docker WORDLISTS image
-      run: docker build --target wordlists -t $container:wordlists .
-    
-    - name: Run the Docker image, making sure it stays up for these tests
-      run: docker run --name $container -id --rm $container:wordlists
-    
-    - name: Check for Seclists presence
-      run: docker exec -t $container ls /usr/share/seclists
-    
-    - name: Check for rockyou presence
-      run: docker exec -t $container ls /usr/share/wordlists/rockyou.txt
-    
-    - name: Clean up the running container
-      run: docker stop $container
+      - name: Initialize Packer
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+      
+      - name: Build the Docker BASE image
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-on-error=abort -only='kali-base.docker.kali-base' -var 'final_image_name=$container'"
+          target: docker.pkr.hcl
 
+      - name: Build the Docker WORDLISTS image
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-on-error=abort -only='kali-final.docker.kali-final' -var 'final_image_name=$container'"
+          target: docker.pkr.hcl
+      
+      - name: Run the Docker image, making sure it stays up for these tests
+        run: docker run --name $container -id --rm $container:wordlists
+      
+      - name: Check for Seclists presence
+        run: docker exec -t $container ls /usr/share/seclists
+      
+      - name: Check for rockyou presence
+        run: docker exec -t $container ls /usr/share/wordlists/rockyou.txt
+      
+      - name: Clean up the running container
+        run: docker stop $container
