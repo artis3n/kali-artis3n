@@ -17,17 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Packer
+        run: apt install -y packer
+
       - name: Initialize Packer
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: init
+        run: packer init .
 
       - name: Validate Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: validate
-          arguments: "-syntax-only"
-          target: docker.pkr.hcl
+        run: packer validate -syntax-only .
   
   docker-build:
     runs-on: ubuntu-latest
@@ -68,18 +65,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Packer
+        run: apt install -y packer
+
       - name: Initialize Packer
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: init
+        run: packer init .
 
       - name: Build the Docker BASE image
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-on-error=abort -only=kali-base.docker.kali-base -var final_image_name=$container"
-        env:
-          PACKER_LOG: 1
+        run: packer build -on-error=abort -only="kali-base.docker.kali-base" -var "final_image_name=$container" .
 
       - name: Run the Docker image, making sure it stays up for these tests
         run: docker run --name $container -id --rm $container:base
@@ -123,24 +116,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Packer
+        run: apt install -y packer
+
       - name: Initialize Packer
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: init
+        run: packer init .
       
       - name: Build the Docker BASE image
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-on-error=abort -only=kali-base.docker.kali-base -var final_image_name=$container"
+        run: packer build -on-error=abort -only="kali-base.docker.kali-base" -var "final_image_name=$container" .
 
       - name: Build the Docker WORDLISTS image
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-on-error=abort -only=kali-final.docker.kali-final -var final_image_name=$container"
-        env:
-          PACKER_LOG: 1
+        run: packer build -on-error=abort -only="kali-final.docker.kali-final" -var "final_image_name=$container" .
       
       - name: Run the Docker image, making sure it stays up for these tests
         run: docker run --name $container -id --rm $container:wordlists
