@@ -26,7 +26,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          arguments: -syntax-only
+          arguments: "-syntax-only"
           target: docker.pkr.hcl
   
   docker-build:
@@ -66,8 +66,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: '-on-error=abort -only="kali-base.docker.kali-base" -var "final_image_name=$container"'
-          target: docker.pkr.hcl
+          arguments: "-on-error=abort -only=kali-base.docker.kali-base -var final_image_name=$container"
 
       - name: Run the Docker image, making sure it stays up for these tests
         run: docker run --name $container -id --rm $container:base
@@ -120,15 +119,13 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: '-on-error=abort -only="kali-base.docker.kali-base" -var "final_image_name=$container"'
-          target: docker.pkr.hcl
+          arguments: "-on-error=abort -only=kali-base.docker.kali-base -var final_image_name=$container"
 
       - name: Build the Docker WORDLISTS image
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: '-on-error=abort -only="kali-final.docker.kali-final" -var "final_image_name=$container"'
-          target: docker.pkr.hcl
+          arguments: "-on-error=abort -only=kali-final.docker.kali-final -var final_image_name=$container"
       
       - name: Run the Docker image, making sure it stays up for these tests
         run: docker run --name $container -id --rm $container:wordlists
