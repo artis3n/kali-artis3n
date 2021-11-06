@@ -41,16 +41,10 @@ build {
     inline = [
       "apt-get update",
       "apt-get install -y --no-install-recommends apt-utils",
-      "apt-get install -y --no-install-recommends amass awscli curl dotdotpwn file finger git hydra impacket-scripts john less locate lsof man-db netcat-traditional nmap python3 python3-pip python3-setuptools python3-wheel socat ssh-client sqlmap tmux vim zip enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba smbclient smbmap smtp-user-enum snmpcheck sslscan tnscmd10g whatweb",
+      "apt-get install -y --no-install-recommends amass awscli curl dotdotpwn exploitdb file finger git hydra impacket-scripts john less locate lsof man-db metasploit-framework netcat-traditional nmap python3 python3-pip python3-setuptools python3-wheel socat ssh-client sqlmap tmux vim zip enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba smbclient smbmap smtp-user-enum snmpcheck sslscan tnscmd10g whatweb",
       "apt-get autoremove -y",
       "apt-get autoclean -y",
       "rm -rf /var/lib/apt/lists/*",
-    ]
-  }
-
-  provisioner "shell" {
-    inline = [
-      "apt-get install -y --no-install-recommends exploitdb metasploit-framework",
     ]
   }
 
