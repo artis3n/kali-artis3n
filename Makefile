@@ -6,7 +6,7 @@ all: install build
 
 .PHONY: install
 install:
-	if [ ! -f /usr/local/bin/dive ]; then scripts/install-dive.sh; else echo "Dive installed, taking no action"; fi;
+	if [ ! -f /opt/homebrew/bin/dive ]; then brew install dive; fi;
 
 .PHONY: size-base
 size-base:
@@ -21,19 +21,23 @@ size:
 	dive build -t test/kali:latest .
 
 .PHONY: build
-build: build-all
+build: base wordlists
 
-.PHONY: build-all
-build-all: base wordlists latest
+.PHONY: old-build
+old-build: old-base old-wordlists
 
 .PHONY: base
 base:
-	docker build --target base -t test/kali:base .
+	packer build -only="kali-base.docker.kali-base" -var 'final_image_name=test/kali' docker.pkr.hcl
 
 .PHONY: wordlists
-full:
-	docker build --target wordlists -t test/kali:wordlists .
+wordlists:
+	packer build -only="kali-final.docker.kali-final" -var 'final_image_name=test/kali' docker.pkr.hcl
 
-.PHONY: latest
-latest:
-	docker build --target wordlists -t test/kali .
+.PHONY: old-base
+old-base:
+	docker build --target base -t test/kali:old-base .
+
+.PHONY: old-wordlists
+old-wordlists:
+	docker build --target wordlists -t test/kali:old-wordlists .

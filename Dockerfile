@@ -4,10 +4,11 @@ LABEL maintainer="Artis3n <dev@artis3nal.com>"
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
+    && apt-get install -y --no-install-recommends apt-utils \
     && apt-get install -y --no-install-recommends amass awscli curl \
     dotdotpwn file finger git hydra impacket-scripts john less locate \
     lsof man-db netcat-traditional nmap python3 python3-pip python3-setuptools \
-    python3-wheel socat ssh-client sslyze sqlmap tmux vim zip \
+    python3-wheel socat ssh-client sqlmap tmux vim zip \
     # autorecon dependencies
     enum4linux gobuster nikto onesixtyone oscanner proxychains4 samba \
     smbclient smbmap smtp-user-enum snmpcheck sslscan tnscmd10g whatweb \
@@ -32,7 +33,8 @@ RUN mkdir /tools \
     && git clone --depth 1 https://github.com/Tib3rius/AutoRecon.git /tools/AutoRecon \
     && cd /tools/AutoRecon \
     && pip3 install -r requirements.txt \
-    && ln -s /tools/AutoRecon/src/autorecon/autorecon.py /usr/local/bin/autorecon
+    && chmod +x /tools/AutoRecon/autorecon.py \
+    && ln -s /tools/AutoRecon/autorecon.py /usr/local/bin/autorecon
 
 ENV TERM=xterm-256color
 
