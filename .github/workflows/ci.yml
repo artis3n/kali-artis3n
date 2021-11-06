@@ -13,7 +13,6 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-    environment: dev
 
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +31,6 @@ jobs:
   
   docker-build:
     runs-on: ubuntu-latest
-    environment: dev
     
     steps:
       - uses: actions/checkout@v2
@@ -48,14 +46,13 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,darwin/amd64,darwin/arm64
+          platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
   base:
     runs-on: ubuntu-latest
-    environment: dev
 
     steps:
       - uses: actions/checkout@v2
@@ -110,7 +107,6 @@ jobs:
     
   wordlists:
     runs-on: ubuntu-latest
-    environment: dev
 
     steps:
       - uses: actions/checkout@v2
