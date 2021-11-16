@@ -36,6 +36,7 @@ jobs:
           tags: |
             type=schedule
             type=edge,branch=main
+            type=raw,value=latest
       
       - name: Docker meta
         id: meta
