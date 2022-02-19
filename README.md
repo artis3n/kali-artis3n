@@ -44,7 +44,7 @@ Efficiency of the build image is checked with [dive](https://github.com/wagoodma
 | With wordlists | ![Dive image with wordlists efficiency](resources/dive-efficiency-wordlists.png) |
 | Without wordlists | ![Dive image without wordlists efficiency](resources/dive-efficiency-base.png) |
 
-<small>Last checked: 2020-08-16</small>
+<small>Last checked: 2022-02-18</small>
 
 The container is not meant for a persistent attacker environment.
 The intention is for a quick environment to run attacks and document the results outside of the container.
@@ -55,14 +55,14 @@ The container does not expect a mounted volume for persistent storage - although
 Download the image:
 
 - [Docker Hub](https://hub.docker.com/r/artis3n/kali)
-- [GitHub Packages](https://github.com/artis3n/kali-artis3n/packages/143757)
+- [GitHub Container Registry](https://github.com/artis3n/kali-artis3n/pkgs/container/kali)
 
 ```bash
 docker pull artis3n/kali:latest
 docker pull artis3n/kali:latest-no-wordlists
 # or
-docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest
-docker pull docker.pkg.github.com/artis3n/kali-artis3n/kali:latest-no-wordlists
+docker pull ghcr.io/artis3n/kali:latest
+docker pull ghcr.io/artis3n/kali:latest-no-wordlists
 ```
 
 Run the container:
@@ -105,43 +105,6 @@ Kill the backgrounded container:
 ```bash
 docker stop kali && docker rm kali
 ```
-
-## Configured tools
-
-- Amass
-- [AutoRecon](https://github.com/Tib3rius/AutoRecon)
-  - curl
-  - enum4linux
-  - **gobuster**
-  - nbtscan
-  - **nikto**
-  - **nmap**
-  - onesixtyone
-  - oscanner
-  - smbclient
-  - smbmap
-  - smtp-user-enum
-  - snmpwalk
-  - sslscan
-  - svwar
-  - tnscmd10g
-  - whatweb
-  - wkhtmltoimage
-- DotDotPwn
-- Hydra
-- [Impacket](https://github.com/SecureAuthCorp/impacket) scripts
-- JohnTheRipper (jumbo)
-- Metasploit / Meterpreter
-  - PostgreSQL 12
-- Netcat
-- Proxychains4 ([proxychains-ng](https://github.com/rofl0r/proxychains-ng))
-- Rockyou wordlist (/usr/share/wordlists/rockyou.txt)
-  - `wordlists` / `latest` image only
-- Searchsploit ([ExploitDB](https://www.exploit-db.com/searchsploit))
-- Seclists wordlist (/usr/share/seclists)
-  - `wordlists` / `latest` image only
-- SSLyze
-- SQLMap
 
 ## Contributions
 
