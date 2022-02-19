@@ -1,0 +1,64 @@
+file:
+  /usr/bin/hydra:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: file
+  /usr/bin/nc:
+    exists: true
+    mode: "0777"
+    owner: root
+    group: root
+    linked-to: /etc/alternatives/nc
+    filetype: symlink
+  /usr/bin/proxychains4:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: file
+  /usr/bin/sqlmap:
+    exists: true
+    mode: "0777"
+    owner: root
+    group: root
+    linked-to: ../share/sqlmap/sqlmap.py
+    filetype: symlink
+  /usr/sbin/john:
+    exists: true
+    mode: "0777"
+    owner: root
+    group: root
+    linked-to: ../lib/john/john-avx512bw-omp
+    filetype: symlink
+  /usr/sbin/zip2john:
+    exists: true
+    mode: "0777"
+    owner: root
+    group: root
+    linked-to: john
+    filetype: symlink
+  /usr/share/seclists:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: directory
+  /usr/share/wordlists/rockyou.txt:
+    exists: true
+    mode: "0600"
+    filetype: file
+command:
+  aws --version:
+    exit-status: 0
+    stdout:
+    - aws-cli/2
+    stderr: []
+    timeout: 10000
+  msfconsole -v:
+    exit-status: 0
+    stdout: []
+    stderr:
+    - 'Framework Version:'
+    timeout: 20000

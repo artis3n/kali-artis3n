@@ -4,10 +4,6 @@ SHELL=/bin/bash
 .PHONY: all
 all: install build
 
-.PHONY: install
-install:
-	if [ ! -f /opt/homebrew/bin/dive ]; then brew install dive; fi;
-
 .PHONY: size-base
 size-base:
 	dive build --target base -t test/kali:base .
@@ -17,27 +13,27 @@ size-wordlists:
 	dive build --target wordlists -t test/kali:wordlists .
 
 .PHONY: size
-size:
-	dive build -t test/kali:latest .
+size: size-wordlists
 
 .PHONY: build
 build: base wordlists
 
-.PHONY: old-build
-old-build: old-base old-wordlists
-
 .PHONY: base
 base:
-	packer build -only="kali-base.docker.kali-base" -var 'final_image_name=test/kali' docker.pkr.hcl
+	docker build --target base -t test/kali:base .
 
 .PHONY: wordlists
 wordlists:
-	packer build -only="kali-final.docker.kali-final" -var 'final_image_name=test/kali' docker.pkr.hcl
+	docker build --target wordlists -t test/kali:wordlists .
 
-.PHONY: old-base
-old-base:
-	docker build --target base -t test/kali:old-base .
+.PHONY: test
+test:
+	dgoss run -t test/kali:wordlists
 
-.PHONY: old-wordlists
-old-wordlists:
-	docker build --target wordlists -t test/kali:old-wordlists .
+.PHONY: test-edit
+test-edit:
+	dgoss edit -t test/kali:wordlists
+
+.PHONY: lint
+lint:
+	docker run --rm -i -v $$(pwd)/.hadolint.yaml:/.config/hadolint.yaml ghcr.io/hadolint/hadolint < Dockerfile
