@@ -43,4 +43,4 @@ jobs:
           cache-to: type=gha,mode=max
       
       - name: Test the image
-        run: dgoss run ${{ env.container }}:test
+        run: dgoss run -t ${{ env.container }}:test

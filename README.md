@@ -14,7 +14,7 @@ The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalil
 It is meant to be lightweight and clocks in around 118 MB.
 You must configure every service and tool you need from that base image.
 
-This container, uncompressed, is around 4.1 GB (or 2.2 GB without wordlists).
+This container, uncompressed, is around 4.7 GB (or 2.4 GB without wordlists).
 It installs and pre-configures a number of frequently uses Kali tools.
 It is meant to allow you to quickly get up and running with a Kali environment on an ephemeral host.
 Don't spend time configuring and tweaking - pull, run, execute, pwn.

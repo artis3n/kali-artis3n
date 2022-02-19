@@ -30,6 +30,10 @@ wordlists:
 test:
 	dgoss run -t test/kali:wordlists
 
+.PHONY: test-edit
+test-edit:
+	dgoss edit -t test/kali:wordlists
+
 .PHONY: lint
 lint:
 	docker run --rm -i -v $$(pwd)/.hadolint.yaml:/.config/hadolint.yaml ghcr.io/hadolint/hadolint < Dockerfile

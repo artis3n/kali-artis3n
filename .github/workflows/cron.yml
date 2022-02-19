@@ -66,7 +66,6 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v2
         with:
-          context: .
           target: base
           platforms: linux/amd64,linux/arm64
           push: true
@@ -78,7 +77,6 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v2
         with:
-          context: .
           target: wordlists
           platforms: linux/amd64,linux/arm64
           push: true
