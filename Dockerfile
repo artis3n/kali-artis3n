@@ -67,3 +67,5 @@ RUN mkdir -p /usr/share/wordlists
 WORKDIR /usr/share/wordlists
 RUN cp /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt.tar.gz /usr/share/wordlists/ \
     && tar -xzf rockyou.txt.tar.gz
+
+WORKDIR /root
