@@ -64,7 +64,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build and Push
-        uses: docker/build-push-action@v3.0.0
+        uses: docker/build-push-action@v3.1.0
         with:
           target: base
           platforms: linux/amd64,linux/arm64
@@ -75,7 +75,7 @@ jobs:
           cache-to: type=gha,mode=max
       
       - name: Build and Push
-        uses: docker/build-push-action@v3.0.0
+        uses: docker/build-push-action@v3.1.0
         with:
           target: wordlists
           platforms: linux/amd64,linux/arm64
