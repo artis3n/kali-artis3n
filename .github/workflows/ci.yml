@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
 
       # May get race conditions due to https://github.com/hadolint/hadolint-action/issues/44
       - name: Lint Dockerfile
