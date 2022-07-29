@@ -1,20 +1,24 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.222.0/containers/docker-in-docker
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/docker-in-docker
 {
 	"name": "Docker in Docker",
 	"dockerFile": "Dockerfile",
 	"runArgs": ["--init", "--privileged"],
 	"mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
 	"overrideCommand": false,
-	
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-azuretools.vscode-docker",
-		"wholroyd.HCL",
-		"yzhang.markdown-all-in-one"
-	],
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"wholroyd.HCL",
+				"yzhang.markdown-all-in-one"
+			]
+		}
+	},
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

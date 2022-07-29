@@ -2,7 +2,7 @@
 SHELL=/bin/bash
 
 .PHONY: all
-all: install build
+all: build
 
 .PHONY: size-base
 size-base:
