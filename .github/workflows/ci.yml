@@ -30,7 +30,7 @@ jobs:
       - uses: docker/setup-buildx-action@v2.2.1
 
       - name: Install Goss
-        uses: e1himself/goss-installation-action@v1.0.4
+        uses: e1himself/goss-installation-action@v1.1.0
       
       - name: Build the Docker image
         uses: docker/build-push-action@v3.2.0
