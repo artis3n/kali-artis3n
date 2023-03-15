@@ -2,7 +2,7 @@
 
 A kalilinux/kali-rolling container with extra juice.
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/artis3n/kali-artis3n/Docker%20Image%20CI)](https://github.com/artis3n/kali-artis3n/actions)
+[![Deploy Docker Image](https://github.com/artis3n/kali-artis3n/actions/workflows/cron.yml/badge.svg)](https://github.com/artis3n/kali-artis3n/actions/workflows/cron.yml)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/kali-artis3n)](https://github.com/artis3n/kali-artis3n/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/artis3n/kali)](https://hub.docker.com/r/artis3n/kali)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/kali-artis3n)
