@@ -33,7 +33,7 @@ jobs:
         uses: e1himself/goss-installation-action@v1.2.1
       
       - name: Build the Docker image
-        uses: docker/build-push-action@v5.1.0
+        uses: docker/build-push-action@v5.2.0
         with:
           push: false
           target: wordlists
