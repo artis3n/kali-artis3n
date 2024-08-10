@@ -7,6 +7,7 @@ A kalilinux/kali-rolling container with extra juice.
 [![Docker Pulls](https://img.shields.io/docker/pulls/artis3n/kali)](https://hub.docker.com/r/artis3n/kali)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/kali-artis3n)
 ![GitHub](https://img.shields.io/github/license/artis3n/kali-artis3n)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/artis3n)](https://github.com/sponsors/artis3n)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)
 
 The [kalilinux/kali-rolling](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) container comes with no pre-installed services.
