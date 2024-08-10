@@ -68,7 +68,7 @@ jobs:
         uses: docker/build-push-action@v6.6.1
         with:
           target: base
-          platforms: linux/amd64,linux/arm64,darwin/arm64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta_base.outputs.tags }}
           labels: ${{ steps.meta_base.outputs.labels }}
