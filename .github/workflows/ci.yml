@@ -19,7 +19,7 @@ jobs:
 
       # May get race conditions due to https://github.com/hadolint/hadolint-action/issues/44
       - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
+        uses: hadolint/hadolint-action@v3.3.0
 
   goss:
     runs-on: ubuntu-latest
