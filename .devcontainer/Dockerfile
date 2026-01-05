@@ -1,5 +1,5 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-buster
+FROM mcr.microsoft.com/vscode/devcontainers/base:1-buster
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
