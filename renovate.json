@@ -1,6 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "schedule:monthly"
+  ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions Updates",
+      "groupSlug": "github-actions"
+    },
+    {
+      "description": "Group devcontainer dependencies",
+      "groupName": "devcontainer-deps",
+      "groupSlug": "devcontainer-features",
+      "matchManagers": ["devcontainer"]
+    }
   ]
 }
